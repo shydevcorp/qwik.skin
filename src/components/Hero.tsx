@@ -1,0 +1,90 @@
+"use client";
+
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Canvas } from "@react-three/fiber";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  Environment,
+} from "@react-three/drei";
+import { KnifeModel } from "./KnifeModel";
+import { Suspense } from "react";
+
+export function Hero() {
+  return (
+    <div className="relative min-h-screen bg-background overflow-hidden">
+      <div
+        className="absolute left-12 top-1/2 -translate-y-1/2 text-[8rem] font-bold select-none tracking-tight text-transparent leading-[0.85] mt-12"
+        style={{ WebkitTextStroke: "1.5px rgb(82, 82, 91, 0.3)" }}
+      >
+        <p>TRADE</p>
+        <p>CS2</p>
+        <p>SKINS</p>
+        <p>ON</p>
+        <p>SOLANA</p>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 xl:px-12 pt-32">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="flex-1 text-foreground">
+            <div className="flex items-center gap-2 mb-4">
+              <Image
+                src="/us-flag.svg"
+                alt="US Flag"
+                width={24}
+                height={16}
+                className="rounded"
+              />
+              <span className="text-muted-foreground font-medium">
+                Trusted by hundreds of thousands
+              </span>
+            </div>
+
+            <h1 className="flex flex-col text-6xl font-medium mb-6 tracking-tight leading-[1.1]">
+              <span>Buy, Sell & Trade</span>
+              <span>
+                <span className="solana-gradient-text font-extrabold">CS2</span>{" "}
+                Skins
+              </span>
+            </h1>
+
+            <p className="text-muted-foreground leading-snug mb-8 max-w-2xl">
+              Trade skins and buy Steam marketplace items on the best and
+              fairest skin trading platform on{" "}
+              <span className="solana-gradient-text font-black">Solana</span>.
+            </p>
+
+            <Button
+              size="lg"
+              className="solana-gradient text-white font-bold px-8 py-6 text-lg tracking-wide hover:opacity-90 transition-opacity"
+            >
+              START TRADING NOW
+            </Button>
+          </div>
+
+          <div className="flex-1 relative h-[600px]">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl rounded-full"></div>
+            <div className="w-full h-full">
+              <Canvas>
+                <Suspense fallback={null}>
+                  <PerspectiveCamera makeDefault position={[0, 0, 8]} />
+                  <OrbitControls
+                    enableZoom={false}
+                    enablePan={false}
+                    minPolarAngle={Math.PI / 2}
+                    maxPolarAngle={Math.PI / 2}
+                  />
+                  <ambientLight intensity={0.5} />
+                  <pointLight position={[10, 10, 10]} intensity={1} />
+                  <KnifeModel position={[0, 0, 0]} />
+                  <Environment preset="city" />
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

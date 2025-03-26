@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="16px" viewBox="0 0 24 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="24" height="16"></rect>
+        <rect fill="#D02F44" x="0" y="0" width="24" height="2"></rect>
+        <rect fill="#D02F44" x="0" y="4" width="24" height="2"></rect>
+        <rect fill="#D02F44" x="0" y="8" width="24" height="2"></rect>
+        <rect fill="#D02F44" x="0" y="12" width="24" height="2"></rect>
+        <rect fill="#46467F" x="0" y="0" width="12" height="9"></rect>
+        <g transform="translate(1.000000, 1.000000)" fill="#FFFFFF">
+            <circle cx="1" cy="1" r="1"></circle>
+            <circle cx="4" cy="1" r="1"></circle>
+            <circle cx="7" cy="1" r="1"></circle>
+            <circle cx="10" cy="1" r="1"></circle>
+            <circle cx="2.5" cy="3" r="1"></circle>
+            <circle cx="5.5" cy="3" r="1"></circle>
+            <circle cx="8.5" cy="3" r="1"></circle>
+            <circle cx="1" cy="5" r="1"></circle>
+            <circle cx="4" cy="5" r="1"></circle>
+            <circle cx="7" cy="5" r="1"></circle>
+            <circle cx="10" cy="5" r="1"></circle>
+            <circle cx="2.5" cy="7" r="1"></circle>
+            <circle cx="5.5" cy="7" r="1"></circle>
+            <circle cx="8.5" cy="7" r="1"></circle>
+        </g>
+    </g>
+</svg> 
