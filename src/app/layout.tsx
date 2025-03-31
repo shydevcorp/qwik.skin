@@ -1,30 +1,28 @@
-import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  variable: "--font-sans",
 });
-
-export const metadata: Metadata = {
-  title: "CS2 Skin Trading Platform",
-  description: "Trade CS2 skins instantly with lowest fees on Solana!",
-};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${outfit.variable} font-sans antialiased bg-gradient-to-br from-[#0A0A0A] via-[#0D0D0D] to-[#0A0A0A] min-h-screen`}>
         <Navbar />
         {children}
       </body>
     </html>
   );
 }
+
+export const metadata = {
+  title: "qwik.skin - CS2 Skin Trading Platform",
+  description: "Trade CS2 skins instantly with Solana",
+};
