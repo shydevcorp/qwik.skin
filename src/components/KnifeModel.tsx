@@ -16,6 +16,33 @@ function Model(props: KnifeModelProps) {
   const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF("/landing/Knife.glb", true);
 
+  scene.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      if (child.material) {
+        child.material.needsUpdate = false;
+        child.material.depthWrite = true;
+        child.material.depthTest = true;
+
+        if (child.material.map) {
+          child.material.map.anisotropy = 16;
+          child.material.map.needsUpdate = false;
+        }
+        if (child.material.normalMap) {
+          child.material.normalMap.anisotropy = 16;
+          child.material.normalMap.needsUpdate = false;
+        }
+        if (child.material.roughnessMap) {
+          child.material.roughnessMap.anisotropy = 16;
+          child.material.roughnessMap.needsUpdate = false;
+        }
+        if (child.material.metalnessMap) {
+          child.material.metalnessMap.anisotropy = 16;
+          child.material.metalnessMap.needsUpdate = false;
+        }
+      }
+    }
+  });
+
   useFrame((state) => {
     if (group.current) {
       group.current.rotation.y += 0.005;
