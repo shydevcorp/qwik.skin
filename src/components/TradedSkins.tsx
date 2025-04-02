@@ -70,11 +70,11 @@ export function TradedSkins() {
   const itemsPerPage = {
     mobile: 1,
     tablet: 3,
-    desktop: 6
+    desktop: 6,
   };
 
   const getItemsPerPage = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.innerWidth < 640) return itemsPerPage.mobile;
       if (window.innerWidth < 1024) return itemsPerPage.tablet;
       return itemsPerPage.desktop;
@@ -82,7 +82,9 @@ export function TradedSkins() {
     return itemsPerPage.desktop;
   };
 
-  const [currentItemsPerPage, setCurrentItemsPerPage] = useState(itemsPerPage.desktop);
+  const [currentItemsPerPage, setCurrentItemsPerPage] = useState(
+    itemsPerPage.desktop,
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -90,27 +92,32 @@ export function TradedSkins() {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handlePrevious = () => {
     setCurrentIndex((prev) =>
       prev === 0
         ? Math.max(0, skins.length - currentItemsPerPage)
-        : Math.max(0, prev - 1)
+        : Math.max(0, prev - 1),
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
-      prev >= skins.length - currentItemsPerPage ? 0 : prev + 1
+      prev >= skins.length - currentItemsPerPage ? 0 : prev + 1,
     );
   };
 
-  const visibleSkins = skins.slice(currentIndex, currentIndex + currentItemsPerPage);
+  const visibleSkins = skins.slice(
+    currentIndex,
+    currentIndex + currentItemsPerPage,
+  );
   if (visibleSkins.length < currentItemsPerPage) {
-    visibleSkins.push(...skins.slice(0, currentItemsPerPage - visibleSkins.length));
+    visibleSkins.push(
+      ...skins.slice(0, currentItemsPerPage - visibleSkins.length),
+    );
   }
 
   return (

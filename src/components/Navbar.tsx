@@ -8,12 +8,12 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <span className="text-xl font-bold solana-gradient-text">qwik.skin</span>
+            <span className="text-xl font-bold solana-gradient-text">
+              qwik.skin
+            </span>
           </div>
           <div>
-            <Button 
-              className="solana-gradient font-medium hover:opacity-90 transition-opacity"
-            >
+            <Button className="solana-gradient font-medium hover:opacity-90 transition-opacity">
               Join waitlist
             </Button>
           </div>
@@ -21,4 +21,4 @@ export function Navbar() {
       </div>
     </nav>
   );
-} 
+}

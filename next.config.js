@@ -13,9 +13,6 @@ const nextConfig = {
     });
     return config;
   },
-  experimental: {
-    optimizeCss: true,
-  },
   async headers() {
     return [
       {
@@ -27,8 +24,27 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Set-Cookie",
+            value: "SameSite=None; Secure; Path=/",
+          },
+        ],
+      },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "/api/:path*",
+      },
+    ];
+  },
+  reactStrictMode: true,
+  output: "standalone",
 };
 
 module.exports = nextConfig;
