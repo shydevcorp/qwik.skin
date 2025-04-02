@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -12,9 +12,9 @@ type KnifeModelProps = {
   children?: React.ReactNode;
 };
 
-export function KnifeModel(props: KnifeModelProps) {
+function Model(props: KnifeModelProps) {
   const group = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/landing/Knife.glb");
+  const { scene } = useGLTF("/landing/Knife.glb", true);
 
   useFrame((state) => {
     if (group.current) {
@@ -32,5 +32,13 @@ export function KnifeModel(props: KnifeModelProps) {
         rotation={[0, 0, Math.PI / 4]}
       />
     </group>
+  );
+}
+
+export function KnifeModel(props: KnifeModelProps) {
+  return (
+    <Suspense fallback={null}>
+      <Model {...props} />
+    </Suspense>
   );
 }
