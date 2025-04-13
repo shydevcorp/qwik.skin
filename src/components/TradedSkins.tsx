@@ -124,8 +124,7 @@ export function TradedSkins() {
     <section className="py-16 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
         <h2 className="text-4xl font-bold mb-12">
-          <span className="solana-gradient-text">Most Traded CS2</span>{" "}
-          <span className="text-muted-foreground">(CS:GO)</span> Skins
+          Most Traded <span className="solana-gradient-text">CS2</span> Skins
         </h2>
 
         <div className="relative px-8 sm:px-12">

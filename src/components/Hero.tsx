@@ -1,13 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  PerspectiveCamera,
-  Environment,
-} from "@react-three/drei";
-import { KnifeModel } from "./KnifeModel";
+import { WeaponImages } from "./WeaponImages";
 import { Suspense } from "react";
 import { AvatarCircles } from "@/components/magicui/avatar-circles";
 
@@ -78,25 +72,13 @@ export function Hero() {
 
           <div className="flex-1 relative h-[600px]">
             <div
-              className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl rounded-full"
-              style={{ width: "80%", height: "80%", left: "10%", top: "10%" }}
+              className="absolute inset-0 bg-gradient-radial from-[rgba(20,20,20,0.5)] to-transparent blur-2xl rounded-full"
+              style={{ width: "90%", height: "90%", left: "5%", top: "5%" }}
             ></div>
             <div className="w-full h-full">
-              <Canvas>
-                <Suspense fallback={null}>
-                  <PerspectiveCamera makeDefault position={[0, 0, 8]} />
-                  <OrbitControls
-                    enableZoom={false}
-                    enablePan={false}
-                    minPolarAngle={Math.PI / 2}
-                    maxPolarAngle={Math.PI / 2}
-                  />
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[10, 10, 10]} intensity={1} />
-                  <KnifeModel position={[0, 0, 0]} />
-                  <Environment preset="city" />
-                </Suspense>
-              </Canvas>
+              <Suspense fallback={null}>
+                <WeaponImages />
+              </Suspense>
             </div>
           </div>
         </div>

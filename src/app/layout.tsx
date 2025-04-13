@@ -25,6 +25,7 @@ export default function RootLayout({
 }
 
 export const metadata = {
-  title: "qwik.skin - CS2 Skin Trading Platform",
+  title:
+    "Trade CS2 Skins 🌠 Best CS2 Skin Trading Site & Trading Bot — qwik.skin",
   description: "Trade CS2 skins instantly with Solana",
 };
