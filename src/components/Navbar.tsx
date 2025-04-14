@@ -197,7 +197,7 @@ export function Navbar() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem
-                    className="text-red-600 focus:text-red-600 cursor-pointer"
+                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-accent/50"
                     onClick={() => {
                       signOut({ redirect: true, callbackUrl: "/" });
                     }}
