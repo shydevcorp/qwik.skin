@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import "@/styles/SteamButton.css";
 import {
   DropdownMenu,
@@ -198,7 +198,9 @@ export function Navbar() {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem
                     className="text-red-600 focus:text-red-600 cursor-pointer"
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      signOut({ redirect: true, callbackUrl: "/" });
+                    }}
                   >
                     Sign out
                   </DropdownMenuItem>
