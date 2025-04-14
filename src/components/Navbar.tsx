@@ -6,6 +6,13 @@ import { SteamIcon } from "@/components/SteamIcon";
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import "@/styles/SteamButton.css";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 // Extract the part that uses useSearchParams into a separate component
 function NavbarErrorHandler() {
@@ -184,18 +191,32 @@ export function Navbar() {
           </div>
           <div>
             {session ? (
-              <div className="flex items-center gap-3">
-                <span className="text-white text-sm font-medium">
-                  {session.user?.name}
-                </span>
-                <Button
-                  variant="ghost"
-                  className="text-white hover:text-white/80"
-                  onClick={() => signOut()}
-                >
-                  Sign out
-                </Button>
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="relative h-10 w-10 rounded-full"
+                  >
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage
+                        src={session.user?.steamAvatar || session.user?.image}
+                        alt={session.user?.name || ""}
+                      />
+                      <AvatarFallback>
+                        {session.user?.name?.[0] || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem
+                    className="text-red-600 focus:text-red-600 cursor-pointer"
+                    onClick={() => signOut()}
+                  >
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <a
                 href="#"

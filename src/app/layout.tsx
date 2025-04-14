@@ -37,4 +37,9 @@ export const metadata = {
   title:
     "Trade CS2 Skins 🌠 Best CS2 Skin Trading Site & Trading Bot — qwik.skin",
   description: "Trade CS2 skins instantly with Solana",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };

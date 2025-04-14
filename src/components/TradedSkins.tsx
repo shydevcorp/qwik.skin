@@ -11,7 +11,7 @@ const SolanaIcon = () => (
     width="16"
     height="12"
     viewBox="0 0 508.07 398.17"
-    className="inline-block ml-1 -mt-[1px]"
+    className="inline-block ml-1"
   >
     <defs>
       <linearGradient
