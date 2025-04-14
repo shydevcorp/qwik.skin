@@ -29,17 +29,6 @@ export default function TradePage() {
     return () => clearTimeout(timer);
   }, [status, router]);
 
-  if (status === "loading") {
-    return (
-      <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-screen">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Loading...</h1>
-          <p className="text-gray-400">Checking authentication status...</p>
-        </div>
-      </div>
-    );
-  }
-
   if (!session || !session.user) {
     return (
       <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-screen">
