@@ -295,19 +295,18 @@ export async function GET(request: Request) {
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
           path: "/",
           httpOnly: true,
-          secure: true, // Always secure for production
+          secure: true,
           sameSite: "lax",
           domain: domain,
         });
 
-        // Set a duplicate visible cookie for debugging
         redirectResponse.cookies.set({
           name: "auth-debug",
           value: "authenticated",
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
           path: "/",
-          httpOnly: false, // Make this visible to JavaScript
-          secure: true, // Always secure for production
+          httpOnly: false,
+          secure: true,
           sameSite: "lax",
           domain: domain,
         });

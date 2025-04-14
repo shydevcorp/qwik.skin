@@ -1,11 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-// Add better global type declaration
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
-// Use global prisma instance to prevent multiple instances during hot reloading
 export const prisma =
   global.prisma ||
   new PrismaClient({
@@ -15,7 +13,6 @@ export const prisma =
         : ["error"],
   });
 
-// Only assign to global object in development to prevent memory leaks in production
 if (process.env.NODE_ENV !== "production") {
   global.prisma = prisma;
 }
@@ -31,7 +28,6 @@ export const connectPrisma = async () => {
   }
 };
 
-// Graceful shutdown
 process.on("beforeExit", async () => {
   await prisma.$disconnect();
 });
