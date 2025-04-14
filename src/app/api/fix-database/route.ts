@@ -8,7 +8,6 @@ export async function GET() {
   try {
     console.log("Starting database fix...");
 
-    // Run Prisma commands to fix the database
     console.log("Generating Prisma client...");
     try {
       const { stdout: genOutput, stderr: genError } = await execPromise(
@@ -37,7 +36,6 @@ export async function GET() {
     } catch (migrateErr) {
       console.error("Error running migration:", migrateErr);
 
-      // Try reset as a last resort
       console.log("Attempting database reset...");
       try {
         const { stdout: resetOutput, stderr: resetError } = await execPromise(

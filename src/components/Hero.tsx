@@ -2,10 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { WeaponImages } from "./WeaponImages";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { AvatarCircles } from "@/components/magicui/avatar-circles";
+import { WaitlistDialog } from "./WaitlistDialog";
 
 export function Hero() {
+  const [showWaitlistDialog, setShowWaitlistDialog] = useState(false);
+
   const avatars = [
     {
       imageUrl:
@@ -58,6 +61,7 @@ export function Hero() {
             <Button
               size="lg"
               className="solana-gradient text-white font-bold px-8 py-6 text-lg tracking-wide hover:opacity-90 transition-opacity"
+              onClick={() => setShowWaitlistDialog(true)}
             >
               JOIN WAITLIST
             </Button>
@@ -83,6 +87,11 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      <WaitlistDialog
+        open={showWaitlistDialog}
+        onOpenChange={setShowWaitlistDialog}
+      />
     </div>
   );
 }
