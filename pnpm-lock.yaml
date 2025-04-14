@@ -88,9 +88,6 @@ importers:
       postgres:
         specifier: ^3.4.5
         version: 3.4.5
-      prisma:
-        specifier: ^6.5.0
-        version: 6.5.0(typescript@5.8.2)
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -146,6 +143,9 @@ importers:
       prettier:
         specifier: 3.5.3
         version: 3.5.3
+      prisma:
+        specifier: ^6.5.0
+        version: 6.5.0(typescript@5.8.2)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.17

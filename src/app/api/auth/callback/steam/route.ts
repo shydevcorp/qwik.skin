@@ -281,21 +281,38 @@ export async function GET(request: Request) {
       }
 
       const redirectResponse = NextResponse.redirect(
-        `${process.env.NEXTAUTH_URL}/trade`,
+        `https://www.qwik.skin/trade`,
       );
 
       try {
+        const domain =
+          process.env.NODE_ENV === "production" ? ".qwik.skin" : undefined;
+        console.log("Using cookie domain:", domain);
+
         redirectResponse.cookies.set({
           name: "next-auth.session-token",
           value: token,
           expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
           path: "/",
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: true, // Always secure for production
           sameSite: "lax",
+          domain: domain,
         });
 
-        console.log("Session cookie set, redirecting to /trade");
+        // Set a duplicate visible cookie for debugging
+        redirectResponse.cookies.set({
+          name: "auth-debug",
+          value: "authenticated",
+          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+          path: "/",
+          httpOnly: false, // Make this visible to JavaScript
+          secure: true, // Always secure for production
+          sameSite: "lax",
+          domain: domain,
+        });
+
+        console.log("Session cookies set, redirecting to /trade");
       } catch (cookieError) {
         console.error("Error setting cookie:", cookieError);
         const errorMessage =

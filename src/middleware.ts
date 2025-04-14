@@ -2,11 +2,24 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next();
+  const requestHeaders = new Headers(request.headers);
+
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 
   if (request.nextUrl.pathname.startsWith("/api/auth")) {
     response.headers.append("Access-Control-Allow-Credentials", "true");
-    response.headers.append("Access-Control-Allow-Origin", "*");
+
+    if (process.env.NODE_ENV === "production") {
+      const origin = request.headers.get("origin") || "https://www.qwik.skin";
+      response.headers.append("Access-Control-Allow-Origin", origin);
+    } else {
+      response.headers.append("Access-Control-Allow-Origin", "*");
+    }
+
     response.headers.append(
       "Access-Control-Allow-Methods",
       "GET,OPTIONS,PATCH,DELETE,POST,PUT",
@@ -28,5 +41,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/api/auth/:path*",
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

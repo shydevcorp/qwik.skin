@@ -7,26 +7,67 @@ import { useRouter } from "next/navigation";
 export default function TradePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [showDebug, setShowDebug] = useState(false);
+  const [showDebug, setShowDebug] = useState(true);
+  const [cookieInfo, setCookieInfo] = useState<string>("Checking cookies...");
+  const [host, setHost] = useState<string>("Checking hostname...");
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
+    if (typeof window !== "undefined") {
+      const cookies = document.cookie;
+      setCookieInfo(cookies || "No cookies found");
+      setHost(window.location.hostname);
     }
-  }, [status, router, session]);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (status === "unauthenticated") {
+        console.log("User is not authenticated, redirecting to home");
+        router.push("/");
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [status, router]);
+
+  const refreshSession = () => {
+    router.refresh();
+    if (typeof window !== "undefined") {
+      setCookieInfo(document.cookie || "No cookies found");
+    }
+  };
 
   if (status === "loading") {
     return (
       <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-screen">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Loading...</h1>
+          <p className="text-gray-400">Checking authentication status...</p>
         </div>
       </div>
     );
   }
 
   if (!session || !session.user) {
-    return null;
+    return (
+      <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-white mb-4">Access Denied</h1>
+          <p className="text-gray-400 mb-4">
+            You need to be logged in to access this page.
+          </p>
+          <div className="mt-4 p-4 bg-gray-800/70 rounded border border-gray-700 text-xs font-mono text-gray-300 overflow-x-auto">
+            <h3 className="text-white text-sm mb-2">Debug Info:</h3>
+            <p>
+              <strong>Session Status:</strong> {status}
+            </p>
+            <p>
+              <strong>Cookies:</strong> {cookieInfo}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const avatarUrl =
@@ -78,6 +119,18 @@ export default function TradePage() {
                   <strong>Cookie Present:</strong>{" "}
                   {document.cookie.includes("next-auth") ? "Yes" : "No"}
                 </p>
+                <p className="text-sm">
+                  <strong>All Cookies:</strong> {cookieInfo}
+                </p>
+                <p className="text-sm">
+                  <strong>Hostname:</strong> {host}
+                </p>
+                <button
+                  onClick={refreshSession}
+                  className="mt-4 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Refresh Session
+                </button>
               </div>
             )}
           </div>
