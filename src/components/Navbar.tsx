@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { SteamIcon } from "@/components/SteamIcon";
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import "@/styles/SteamButton.css";
 
 // Extract the part that uses useSearchParams into a separate component
 function NavbarErrorHandler() {
@@ -196,13 +197,19 @@ export function Navbar() {
                 </Button>
               </div>
             ) : (
-              <Button
-                className="solana-gradient font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
-                onClick={handleSteamLogin}
+              <a
+                href="#"
+                className="steambutton"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSteamLogin();
+                }}
               >
-                <SteamIcon width={20} height={20} />
-                Login with Steam
-              </Button>
+                <span>Login With Steam</span>
+                <div className="icon">
+                  <i className="fa fa-steam-square"></i>
+                </div>
+              </a>
             )}
           </div>
         </div>
