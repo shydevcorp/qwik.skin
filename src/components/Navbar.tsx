@@ -1,8 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { SteamIcon } from "@/components/SteamIcon";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import "@/styles/SteamButton.css";
@@ -14,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-// Extract the part that uses useSearchParams into a separate component
 function NavbarErrorHandler() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [errorType, setErrorType] = useState<string | null>(null);
@@ -39,7 +37,6 @@ function NavbarErrorHandler() {
 
       setErrorType(error);
 
-      // Create a more detailed error message
       let detailedMessage = message || "Unknown error";
 
       if (name) {
@@ -52,7 +49,6 @@ function NavbarErrorHandler() {
 
       setErrorMessage(detailedMessage);
 
-      // Show fix database button if this is a database error
       if (
         error === "DatabaseNotSetup" ||
         error === "DatabaseFindError" ||
@@ -64,13 +60,11 @@ function NavbarErrorHandler() {
         setShowFixDbButton(true);
       }
 
-      // Clear error after 10 seconds
       const timer = setTimeout(() => {
         setErrorMessage(null);
         setErrorType(null);
       }, 10000);
 
-      // Log to console for debugging
       if (error === "SteamAuthError") {
         console.log("Steam auth error details:", {
           error,
@@ -97,7 +91,6 @@ function NavbarErrorHandler() {
       if (response.ok) {
         setFixDbResult(`Database fix completed. ${data.message}`);
 
-        // Reload the page after 3 seconds
         setTimeout(() => {
           window.location.reload();
         }, 3000);
@@ -115,7 +108,6 @@ function NavbarErrorHandler() {
     }
   };
 
-  // Render error message if there is one
   if (!errorMessage) return null;
 
   return (
@@ -127,7 +119,7 @@ function NavbarErrorHandler() {
 
           {showFixDbButton && (
             <Button
-              className="mt-2 bg-red-600 hover:bg-red-700 text-white text-xs py-1"
+              className="mt-2 text-white text-xs py-1"
               onClick={handleFixDatabase}
               disabled={fixingDb}
             >
@@ -135,9 +127,7 @@ function NavbarErrorHandler() {
             </Button>
           )}
 
-          {fixDbResult && (
-            <p className="text-xs text-green-300 mt-2">{fixDbResult}</p>
-          )}
+          {fixDbResult && <p className="text-xs mt-2">{fixDbResult}</p>}
         </div>
         <button
           className="text-white/80 hover:text-white ml-4"
@@ -159,14 +149,11 @@ export function Navbar() {
   const [errorType, setErrorType] = useState<string | null>(null);
 
   const handleSteamLogin = () => {
-    // Clear any previous errors
     setErrorMessage(null);
     setErrorType(null);
 
-    // Log the current origin for debugging
     console.log("Current origin:", window.location.origin);
 
-    // Redirect to Steam OpenID login manually
     const params = new URLSearchParams({
       "openid.ns": "http://specs.openid.net/auth/2.0",
       "openid.mode": "checkid_setup",
@@ -236,7 +223,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Wrap the component using useSearchParams in Suspense */}
       <Suspense>
         <NavbarErrorHandler />
       </Suspense>
