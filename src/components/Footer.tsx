@@ -16,9 +16,6 @@ export default function Footer() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <span className="text-lg font-bold solana-gradient-text hover:brightness-90 transition-all cursor-pointer">
-              qwik.skin
-            </span>
             <p className="text-sm text-muted-foreground mt-2">
               Trade CS2 skins instantly with lowest fees on Solana
               <br />
