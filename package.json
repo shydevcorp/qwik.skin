@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
     "prepare": "husky",
@@ -26,6 +26,7 @@
     "@solana/web3.js": "1",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/pg": "^8.11.12",
+    "beasties": "^0.3.3",
     "bs58": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -35,7 +36,7 @@
     "lucide-react": "^0.484.0",
     "motion": "^12.6.2",
     "nanoid": "^5.1.5",
-    "next": "15.1.7",
+    "next": "15.3.2",
     "next-auth": "^4.24.11",
     "passport": "^0.7.0",
     "passport-steam": "^1.0.18",
@@ -63,7 +64,8 @@
     "prettier": "3.5.3",
     "prisma": "^6.5.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vite-plugin-beasties": "^0.3.3"
   },
   "packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af",
   "lint-staged": {

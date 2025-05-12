@@ -14,7 +14,8 @@ export function middleware(request: NextRequest) {
     response.headers.append("Access-Control-Allow-Credentials", "true");
 
     if (process.env.NODE_ENV === "production") {
-      const origin = request.headers.get("origin") || "https://www.qwik.skin";
+      const origin =
+        request.headers.get("origin") || process.env.NEXT_PUBLIC_APP_URL;
       response.headers.append("Access-Control-Allow-Origin", origin);
     } else {
       response.headers.append("Access-Control-Allow-Origin", "*");

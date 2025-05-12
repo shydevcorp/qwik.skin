@@ -80,7 +80,7 @@ export const authOptions: NextAuthOptions = {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         domain:
-          process.env.NODE_ENV === "production" ? ".qwik.skin" : undefined, // Note the dot prefix for subdomain support
+          process.env.NODE_ENV === "production" ? ".qwik.skin" : undefined,
       },
     },
   },

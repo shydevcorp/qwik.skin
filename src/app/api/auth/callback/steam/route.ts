@@ -281,12 +281,16 @@ export async function GET(request: Request) {
       }
 
       const redirectResponse = NextResponse.redirect(
-        `https://www.qwik.skin/trade`,
+        process.env.NODE_ENV === "production"
+          ? `${process.env.NEXT_PUBLIC_APP_URL}/trade`
+          : `${process.env.NEXT_PUBLIC_APP_URL}/trade`,
       );
 
       try {
         const domain =
-          process.env.NODE_ENV === "production" ? ".qwik.skin" : undefined;
+          process.env.NODE_ENV === "production"
+            ? process.env.COOKIE_DOMAIN
+            : undefined;
         console.log("Using cookie domain:", domain);
 
         redirectResponse.cookies.set({

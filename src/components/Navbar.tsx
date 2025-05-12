@@ -144,30 +144,50 @@ function NavbarErrorHandler() {
 }
 
 export function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [errorType, setErrorType] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSteamLogin = () => {
     setErrorMessage(null);
     setErrorType(null);
 
-    console.log("Current origin:", window.location.origin);
+    try {
+      const params = new URLSearchParams({
+        "openid.ns": "http://specs.openid.net/auth/2.0",
+        "openid.mode": "checkid_setup",
+        "openid.return_to": `${window.location.origin}/api/auth/callback/steam`,
+        "openid.realm": window.location.origin,
+        "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
+        "openid.claimed_id":
+          "http://specs.openid.net/auth/2.0/identifier_select",
+      });
 
-    const params = new URLSearchParams({
-      "openid.ns": "http://specs.openid.net/auth/2.0",
-      "openid.mode": "checkid_setup",
-      "openid.return_to": `${window.location.origin}/api/auth/callback/steam`,
-      "openid.realm": window.location.origin,
-      "openid.identity": "http://specs.openid.net/auth/2.0/identifier_select",
-      "openid.claimed_id": "http://specs.openid.net/auth/2.0/identifier_select",
-    });
-
-    const steamLoginUrl = `https://steamcommunity.com/openid/login?${params.toString()}`;
-    console.log("Redirecting to Steam login URL:", steamLoginUrl);
-
-    window.location.href = steamLoginUrl;
+      const steamLoginUrl = `https://steamcommunity.com/openid/login?${params.toString()}`;
+      window.location.href = steamLoginUrl;
+    } catch (error) {
+      console.error("Error during Steam login:", error);
+      setErrorMessage("Failed to initiate Steam login");
+      setErrorType("Login Error");
+    }
   };
+
+  // Show loading state while session is being fetched
+  if (status === "loading") {
+    return (
+      <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b border-border/40 backdrop-blur-md bg-background/90">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center">
+              <img src="/qwik.skin-logo.png" alt="Qwik Trade" className="h-8" />
+            </div>
+            <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b border-border/40 backdrop-blur-md bg-background/90">
@@ -197,7 +217,7 @@ export function Navbar() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem
-                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-accent/50"
+                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-accent/50 !hover:bg-accent !focus:bg-accent !focus:text-accent-foreground"
                     onClick={() => {
                       signOut({ redirect: true, callbackUrl: "/" });
                     }}
@@ -225,7 +245,7 @@ export function Navbar() {
         </div>
       </div>
 
-      <Suspense>
+      <Suspense fallback={null}>
         <NavbarErrorHandler />
       </Suspense>
     </nav>
