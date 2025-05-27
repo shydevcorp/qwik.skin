@@ -30,18 +30,19 @@ export default function TradePage() {
   }, [status, router]);
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto">
-          <div>
-            <div className="text-center py-12">
-              <p className="text-2xl text-white font-medium">
-                We are still building... 🏗️
-              </p>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen h-screen bg-background relative w-screen flex overflow-hidden px-10 py-8">
+      {/* Left Column */}
+      <div className="bg-red-300 basis-2/5 p-2 h-full border-black border-2">
+        dsfdsf
       </div>
+
+      {/* Middle Column */}
+      <div className="bg-red-300 basis-1/5 p-2 h-full border-black border-2">
+        dsfdsf
+      </div>
+
+      {/* Right Column */}
+      <div className="bg-red-300 basis-2/5 p-2 h-full border-black border-2"></div>
     </div>
   );
 }

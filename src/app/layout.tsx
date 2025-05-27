@@ -22,7 +22,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${outfit.variable} font-sans antialiased bg-gradient-to-br from-[#0A0A0A] via-[#0D0D0D] to-[#0A0A0A] min-h-screen`}
+        className={`${outfit.variable} w-screen font-sans antialiased bg-gradient-to-br from-[#0A0A0A] via-[#0D0D0D] to-[#0A0A0A] min-h-screen overflow-x-hidden`}
       >
         <AuthProvider>
           <Navbar />
