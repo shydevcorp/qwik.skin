@@ -10,7 +10,8 @@ interface CustomAccordionProps {
   className?: string;
   headerClassName?: string;
   contentClassName?: string;
-  solanaShadowOnHover?: boolean;
+  headerText?: string;
+  isRev?: boolean;
 }
 
 export function CustomAccordion({
@@ -21,78 +22,95 @@ export function CustomAccordion({
   className = "",
   headerClassName = "",
   contentClassName = "",
-  solanaShadowOnHover = false,
+  headerText = "",
+  isRev = false,
 }: CustomAccordionProps) {
   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
-  const [hasHover, setHasHover] = useState(false);
 
   return (
     <div
-      className={`w-full max-h-fit rounded-xl min-h-fit overflow-visible bg-white border border-gray-200 shadow-[0_4px_24px_0_rgba(0,0,0,0.04)] relative ${className}`}
-      onMouseEnter={solanaShadowOnHover ? () => setHasHover(true) : undefined}
-      onMouseLeave={solanaShadowOnHover ? () => setHasHover(false) : undefined}
-      style={{
-        boxShadow:
-          "0 4px 24px 0 rgba(0,0,0,0.04), 0 0 0 2px transparent, 0 2px 16px 0 rgba(162,89,255,0.12)",
-      }}
+      className={`w-full max-h-fit rounded-lg min-h-fit overflow-visible bg-[#3f3c38]  relative ${className}`}
     >
-      {solanaShadowOnHover && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: hasHover ? 0.4 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          style={{
-            background: "linear-gradient(to right, #00FFA3, #03E1FF, #DC1FFF)",
-          }}
-          className="pointer-events-none absolute top-0 left-0 w-full h-full blur-[5px] opacity-50 rounded-xl z-0"
-        />
-      )}
-      {solanaShadowOnHover && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: hasHover ? 0.4 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          style={{
-            background: "linear-gradient(to right, #00FFA3, #03E1FF, #DC1FFF)",
-          }}
-          className="pointer-events-none absolute top-0 left-0 w-full h-full  opacity-50 rounded-xl z-0 blur-[2px]"
-        />
-      )}
       <motion.div
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full cursor-pointer transition-all duration-300 h-[50px] ${isOpen ? "rounded-t-xl" : "rounded-xl"} overflow-hidden flex items-center justify-between px-4 bg-white relative z-10 ${headerClassName}`}
+        animate={{ opacity: isOpen ? 0.9 : 1 }}
+        transition={{ duration: 0.15 }}
+        className={`w-full bg-white/5 cursor-pointer transition-all duration-300 h-[50px] ${isOpen ? "rounded-t-lg" : "rounded-lg"} overflow-hidden ${isRev ? "flex-row" : "flex-row-reverse"} flex items-center justify-between px-4 bg-[#3f3c38 ] relative z-10 ${headerClassName}`}
       >
-        <div className="text-black flex items-center gap-2">
+        <div
+          className={`text-white ${isRev ? "flex-row" : "flex-row-reverse"} flex items-center gap-2`}
+        >
           <motion.h1
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <ChevronDown className="w-3 h-3 text-gray-400" />
           </motion.h1>
-          <h1 className="text-md font-semibold text-black">{title}</h1>
+          <h1
+            style={{ fontFamily: "var(--font-space)" }}
+            className="text-sm font-light text-white"
+          >
+            {title}
+          </h1>
         </div>
         {value !== undefined && (
-          <div className="text-black font-mono text-base">
+          <div
+            style={{ fontFamily: "var(--font-space)" }}
+            className={`text-white  ${isRev ? "flex-row" : "flex-row-reverse "} font-mono text-base flex items-center gap-2`}
+          >
             {typeof value === "number" ? `$ ${value.toFixed(2)}` : value}
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="mdi"
+              data-icon="basket"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="w-4 h-4 text-white"
+            >
+              <path
+                fill="currentColor"
+                d="M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z"
+              />
+            </svg>
           </div>
         )}
-        {/* Gradient underline */}
-        <div className="absolute left-0 bottom-0 w-full h-[3px] bg-gradient-to-r from-[#9945FF] via-[#5F5CFF] to-[#14F195]" />
       </motion.div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "140px", opacity: 1 }}
-            exit={{ height: 0, opacity: 0.3 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`w-full rounded-b-xl overflow-hidden bg-white relative z-10 ${contentClassName}`}
-            style={{
-              boxShadow:
-                "0 0 0 0 transparent, 0 2px 16px 0 rgba(162,89,255,0.10)",
+            initial={{ height: 0, opacity: 0, scale: 0.95 }}
+            animate={{ height: "150px", opacity: 1, scale: 1 }}
+            exit={{ height: 0, opacity: 0, scale: 0.95 }}
+            transition={{
+              duration: 0.1,
+              opacity: {
+                duration: isOpen ? 0.1 : 0.5,
+              },
+              height: { duration: 0.2 },
+              ease: "easeIn",
             }}
+            className={`w-full rounded-b-lg flex flex-col  justify-center items-center overflow-hidden bg-[#3f3c38] relative z-10 ${contentClassName}`}
           >
-            <div className="p-4">{children}</div>
+            <div
+              className="absolute inset-0 z-[-1] opacity-40  bg-repeat"
+              style={{
+                backgroundImage: `url('/trade/custom-accordin-bg.svg')`,
+                backgroundSize: "auto",
+                width: "100%",
+                height: "100%",
+                mask: "radial-gradient(circle at center, white 0%, transparent 100%)",
+              }}
+            ></div>
+
+            <h1
+              style={{ fontFamily: "var(--font-space)" }}
+              className="text-white text-lg font-semibold"
+            >
+              {headerText}
+            </h1>
+            <div className="p-1 text-white/40">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
