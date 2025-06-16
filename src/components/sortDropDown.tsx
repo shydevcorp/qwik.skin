@@ -22,14 +22,14 @@ const gameOptions: { label: GameOption; icon: string }[] = [
     label: "C2",
     icon: "https://skinsmonkey.com/_nuxt/img/730.a059836.svg",
   },
-  {
-    label: "rust",
-    icon: "https://skinsmonkey.com/_nuxt/img/252490.be47a7c.svg",
-  },
-  {
-    label: "TF2",
-    icon: "https://skinsmonkey.com/_nuxt/img/440.71a9c64.svg",
-  },
+  // {
+  //   label: "rust",
+  //   icon: "https://skinsmonkey.com/_nuxt/img/252490.be47a7c.svg",
+  // },
+  // {
+  //   label: "TF2",
+  //   icon: "https://skinsmonkey.com/_nuxt/img/440.71a9c64.svg",
+  // },
 ];
 
 interface SortDropdownProps {
@@ -48,12 +48,12 @@ export const GameDropdown: React.FC<GameDropdownProps> = ({
 }) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <button className="flex items-center gap-3 px-2 py-2 rounded-md  hover:bg-[#504c46] transition-colors text-white/50 hover:text-white font-semibold text-sm shadow-sm border border-transparent focus:outline-none">
+      <button className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-[#362D45] transition-colors text-white/50 hover:text-white font-semibold text-sm shadow-sm border border-transparent focus:outline-none">
         {gameOptions.find((g) => g.label === value) && (
           <img
             src={gameOptions.find((g) => g.label === value)!.icon}
             alt={String(value)}
-            className="w-5 h-5"
+            className="w-6 h-6 p-1"
           />
         )}
         <span className="font-bold">{value}</span>
@@ -61,14 +61,14 @@ export const GameDropdown: React.FC<GameDropdownProps> = ({
       </button>
     </DropdownMenuTrigger>
     <DropdownMenuContent
-      className="bg-[#45413c] border-none mt-1 min-w-[112px] rounded-md shadow-lg"
+      className="bg-[#2D2438] border-none mt-1 min-w-[112px] rounded-md shadow-lg"
       align="start"
     >
       {gameOptions.map((option) => (
         <DropdownMenuItem
           key={option.label}
           onClick={() => onChange(option.label)}
-          className={`flex items-center gap-2 max-w-full px-4 py-2 text-white text-sm font-semibold rounded-md cursor-pointer hover:bg-[#504c46] transition-colors ${
+          className={`flex items-center gap-2 max-w-full px-4 py-2 text-white text-sm font-semibold rounded-md cursor-pointer hover:bg-[#1A1625] transition-colors ${
             value === option.label ? "opacity-100" : "opacity-80"
           }`}
         >
@@ -87,25 +87,33 @@ export const SortDropdown: React.FC<SortDropdownProps> = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-3 px-2 py-2 rounded-md  hover:bg-[#504c46]  transition-colors text-white/50 hover:text-white font-semibold text-sm shadow-sm border border-transparent focus:outline-none">
-          <SlidersHorizontal className="w-5 h-5 opacity-80" />
+        <button className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-[#362D45] transition-colors text-white/50 hover:text-white font-semibold text-sm shadow-sm border border-transparent focus:outline-none">
+          <img
+            src="/trade/dropdown.svg"
+            alt="sort"
+            className={`w-5 h-5 scale-x-[-1] opacity-80 ${value.toLowerCase().includes("min") ? "scale-y-[-1]" : ""}`}
+          />
           <span className="font-bold">{value}</span>
           <ChevronDown className="w-4 h-4 ml-1 opacity-80" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="bg-[#45413c] border-none mt-1 min-w-[100%] rounded-md shadow-lg"
+        className="bg-[#2D2438] border-none mt-1 min-w-[100%] rounded-md shadow-lg"
         align="start"
       >
         {sortOptions.map((option) => (
           <DropdownMenuItem
             key={option}
             onClick={() => onChange(option)}
-            className={`flex items-center gap-2 max-w-full px-4 py-2 text-white  text-sm font-semibold rounded-md cursor-pointer hover:bg-[#504c46] transition-colors ${
+            className={`flex items-center gap-2 max-w-full px-4 py-2 text-white text-sm font-semibold rounded-md cursor-pointer hover:bg-[#1A1625] transition-colors ${
               value === option ? "opacity-100" : "opacity-80"
             }`}
           >
-            <SlidersHorizontal className="w-5 h-5 opacity-80" />
+            <img
+              src="/trade/dropdown.svg"
+              alt="sort"
+              className={`w-9 h-9 p-1.5 rounded-sm hover:bg-[#1A1625] opacity-80 ${option.toLowerCase().includes("min") ? "scale-y-[-1]" : ""}`}
+            />
             <span>{option}</span>
           </DropdownMenuItem>
         ))}

@@ -17,15 +17,15 @@ export default function TradeLockAccordion() {
   const [isTradeLockOpen, setIsTradeLockOpen] = useState(false);
   const [isTradeLockSelected, setIsTradeLockSelected] = useState(8);
   const colours = [
-    "#83b135",
-    "#95b538",
-    "#a6b83c",
-    "#b7bc42",
-    "#c7bf49",
-    "#d7c251",
-    "#e6c65a",
-    "#f4c964",
-    "#f4b264",
+    "#B388FF", // Lightest purple
+    "#A379FF",
+    "#946AFF",
+    "#855BFF",
+    "#764CFF",
+    "#673DFF",
+    "#582EFF",
+    "#491FFF",
+    "#3A10FF", // Darkest purple
   ];
 
   return (
@@ -119,10 +119,25 @@ export default function TradeLockAccordion() {
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div
-                    className="absolute bottom-0 left-0 w-full scale-x-110 h-[3px] z-10 bg-white"
+                    className="absolute bottom-0 left-0 w-full transition-all duration-300 scale-x-110 h-[3px] z-10 bg-[#2D2438]"
                     layoutId="slider-line"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  ></motion.div>
+                  >
+                    <div
+                      className="absolute inset-0 bg-white origin-right"
+                      style={{
+                        width: `  ${(isTradeLockSelected / (colours.length - 1)) * 100}%`,
+                        maskImage: "linear-gradient(to right, black, black)",
+                        WebkitMaskImage:
+                          "linear-gradient(to right, black, black)",
+                      }}
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full scale-x-110 h-[1px] z-10 bg-[#9D5CFF]/20"
+                    layoutId="slider-line-shadow"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
                   {colours.map((color, index) => (
                     <motion.div
                       key={index}
@@ -138,8 +153,13 @@ export default function TradeLockAccordion() {
                         );
                         setIsTradeLockSelected(index);
                       }}
-                      className={`w-5 h-4 cursor-pointer relative flex items-end justify-center`}
-                      style={{ backgroundColor: color }}
+                      className={`w-5 h-4 cursor-pointer relative transition-colors duration-300  flex items-end justify-center`}
+                      style={{
+                        backgroundColor:
+                          Number(isTradeLockSelected) >= index
+                            ? color
+                            : "#383530",
+                      }}
                       whileHover={{
                         scale: 1.15,
                         zIndex: 5,

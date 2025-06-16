@@ -68,16 +68,16 @@ export default function MiddleRow({
   };
 
   return (
-    <div className="basis-2/12 gap-2 p-4 px-2 h-full flex-col flex">
+    <div className="basis-2/12 gap-2 p-4 px-2 h-full flex-col min-w-[200px]   flex max-[950px]:hidden">
       {/* Trade button */}
-      <button className="w-full text-center font-semibold self-start min-h-fit h-10 text-[#302e2a] p-4 rounded-md bg-yellow-400">
+      <button className="w-full text-center font-semibold self-start min-h-fit h-10 text-[#1A1625] p-4 rounded-md bg-[#9D5CFF]">
         Trade items
       </button>
 
       {/* Filter mode toggle */}
       <div
         style={{ fontFamily: "var(--font-space)" }}
-        className="w-full h-10 p-1 bg-[#3f3c38] rounded-sm flex gap-1 relative overflow-hidden"
+        className="w-full h-10 p-1 bg-[#2D2438] rounded-sm flex gap-1 relative overflow-hidden"
       >
         <div className="w-[calc(50%-8px)] ml-1 h-[80%] bg-white/15 absolute top-1/2 -translate-y-1/2 left-0 rounded-sm"></div>
         <div className="w-1/2 h-full relative z-4 text-white text-sm rounded-sm flex justify-center items-center">
@@ -89,7 +89,7 @@ export default function MiddleRow({
       </div>
 
       {/* Price filter accordion */}
-      <div className="flex flex-col h-full overflow-y-auto pb-2 no-scrollbar gap-2">
+      <div className="flex flex-col h-full overflow-y-auto max-w-[250px] pb-2 no-scrollbar gap-2">
         <Accordion
           type="single"
           collapsible
@@ -242,7 +242,7 @@ export default function MiddleRow({
                       >
                         <div
                           className={`w-4 h-4 rounded flex items-center justify-center transition-colors ${
-                            hasHover ? "bg-yellow-400" : "bg-transparent"
+                            hasHover ? "bg-[#9D5CFF]" : "bg-transparent"
                           } border border-gray-400`}
                         >
                           {affordableOnly && (
@@ -342,7 +342,7 @@ export default function MiddleRow({
                         >
                           <div
                             className="w-4 h-4 rounded flex items-center justify-center transition-colors 
-                          border border-gray-400 group-hover:bg-yellow-400"
+                          border border-gray-400 group-hover:bg-[#9D5CFF]"
                           >
                             {false && (
                               <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
@@ -435,7 +435,7 @@ export default function MiddleRow({
                         >
                           <div
                             className="w-4 h-4 rounded flex items-center justify-center transition-colors 
-                          border border-gray-400 group-hover:bg-yellow-400"
+                          border border-gray-400 group-hover:bg-[#9D5CFF]"
                           >
                             {false && (
                               <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
@@ -456,9 +456,10 @@ export default function MiddleRow({
       </div>
 
       {/* Reset Filters Button */}
+
       <button
         style={{ fontFamily: "var(--font-space)" }}
-        className="w-full text-center font-medium self-start min-h-fit h-10 text-white px-4 py-2 rounded-md bg-transparent border border-white/20 hover:bg-white/10 transition-colors flex items-center justify-center mt-auto mb-4"
+        className="w-full text-center font-medium self-start min-h-fit h-10 text-white px-4 py-2 rounded-md bg-transparent border border-[#9D5CFF]/20 hover:bg-[#9D5CFF]/10 transition-colors flex items-center justify-center mt-auto mb-4"
         onClick={() => {
           // Reset price range
           setPriceRange([0, 10000]);

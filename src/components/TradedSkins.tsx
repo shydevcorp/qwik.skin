@@ -190,7 +190,7 @@ export function TradedSkins() {
                 key={skin.id}
                 className="relative group bg-card overflow-hidden hover:z-10 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#6E3AE4]/20 to-[#9D5CFF]/20 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                 <div className="aspect-square w-full bg-black/40 flex items-center justify-center p-4 relative">
                   <div className="w-full h-32 flex items-center justify-center">
                     <div className="w-full h-full flex items-center justify-center relative">
@@ -199,7 +199,7 @@ export function TradedSkins() {
                         alt={skin.name}
                         width={1024}
                         height={1024}
-                        className="object-contain drop-shadow-[0_0_25px_rgba(153,69,255,0.4)] hover:drop-shadow-[0_0_35px_rgba(20,241,149,0.4)] transition-all duration-300"
+                        className="object-contain drop-shadow-[0_0_25px_rgba(157,92,255,0.4)] hover:drop-shadow-[0_0_35px_rgba(179,136,255,0.4)] transition-all duration-300"
                       />
                     </div>
                   </div>

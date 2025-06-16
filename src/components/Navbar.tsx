@@ -152,6 +152,7 @@ export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const isTradeRoute = pathname === "/trade";
+  const isLandingRoute = pathname === "/";
 
   const navItems = [
     { name: "Trade", path: "/trade", icon: "/navbar/trade.svg" },
@@ -206,7 +207,9 @@ export function Navbar() {
   }
 
   return (
-    <nav className="relative top-0 left-0 right-0 z-50 w-full border-b border-border/40 backdrop-blur-md bg-[#21201e]">
+    <nav
+      className={`relative top-0 left-0 right-0 z-50 w-full border-b border-[#2D2438]/40 backdrop-blur-md ${isLandingRoute ? "bg-[#09001a]" : "bg-[#1A1625]"}`}
+    >
       <div
         className={`mx-auto px-4 md:px-6 lg:px-8 xl:px-12 transition-all duration-300 ${isTradeRoute ? "w-full" : "w-[90%]"}`}
       >
@@ -222,8 +225,8 @@ export function Navbar() {
                   <div key={item.path} className="relative group">
                     <Link
                       href={item.path}
-                      className={`text-md font-medium flex items-center gap-2 transition-colors duration-200 group-hover:text-yellow-500 ${
-                        isActive ? "text-yellow-500" : "text-gray-300"
+                      className={`text-md font-medium flex items-center gap-2 transition-colors duration-200 group-hover:text-[#9D5CFF] ${
+                        isActive ? "text-[#9D5CFF]" : "text-gray-300"
                       }`}
                     >
                       <img
@@ -236,7 +239,7 @@ export function Navbar() {
                     <AnimatePresence mode="wait">
                       {isActive && (
                         <motion.div
-                          className="absolute left-0 right-0 bg-yellow-500 h-1"
+                          className="absolute left-0 right-0 bg-[#9D5CFF] h-1"
                           layoutId="navIndicator"
                           initial={false}
                           style={{ bottom: "170%" }}
@@ -275,19 +278,19 @@ export function Navbar() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem
-                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-accent/50 !hover:bg-accent !focus:bg-accent !focus:text-accent-foreground"
+                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-[#2D2438]/50 !hover:bg-[#2D2438] !focus:bg-[#2D2438] !focus:text-[#9D5CFF]"
                     onClick={() => router.push("/profile")}
                   >
                     Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-accent/50 !hover:bg-accent !focus:bg-accent !focus:text-accent-foreground"
+                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-[#2D2438]/50 !hover:bg-[#2D2438] !focus:bg-[#2D2438] !focus:text-[#9D5CFF]"
                     onClick={() => router.push("/settings")}
                   >
                     Settings
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-accent/50 !hover:bg-accent !focus:bg-accent !focus:text-accent-foreground"
+                    className="cursor-pointer text-foreground focus:text-foreground hover:bg-[#2D2438]/50 !hover:bg-[#2D2438] !focus:bg-[#2D2438] !focus:text-[#9D5CFF]"
                     onClick={() => {
                       signOut({ redirect: true, callbackUrl: "/" });
                     }}
@@ -299,7 +302,7 @@ export function Navbar() {
             ) : (
               <a
                 href="#"
-                className="steambutton"
+                className="steambutton bg-[#9D5CFF] hover:bg-[#B388FF] text-[#1A1625]"
                 onClick={(e) => {
                   e.preventDefault();
                   handleSteamLogin();

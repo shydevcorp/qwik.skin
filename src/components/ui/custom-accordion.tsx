@@ -29,13 +29,13 @@ export function CustomAccordion({
 
   return (
     <div
-      className={`w-full max-h-fit rounded-lg min-h-fit overflow-visible bg-[#3f3c38]  relative ${className}`}
+      className={`w-full max-h-fit rounded-lg min-h-fit overflow-visible bg-[#2D2438]  relative ${className}`}
     >
       <motion.div
         onClick={() => setIsOpen(!isOpen)}
         animate={{ opacity: isOpen ? 0.9 : 1 }}
         transition={{ duration: 0.15 }}
-        className={`w-full bg-white/5 cursor-pointer transition-all duration-300 h-[50px] ${isOpen ? "rounded-t-lg" : "rounded-lg"} overflow-hidden ${isRev ? "flex-row" : "flex-row-reverse"} flex items-center justify-between px-4 bg-[#3f3c38 ] relative z-10 ${headerClassName}`}
+        className={`w-full bg-[#1A1625]/20 cursor-pointer transition-all duration-300 h-[50px] ${isOpen ? "rounded-t-lg" : "rounded-lg"} overflow-hidden ${isRev ? "flex-row" : "flex-row-reverse"} flex items-center justify-between px-4 bg-[#2D2438] relative z-10 ${headerClassName}`}
       >
         <div
           className={`text-white ${isRev ? "flex-row" : "flex-row-reverse"} flex items-center gap-2`}
@@ -44,7 +44,7 @@ export function CustomAccordion({
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <ChevronDown className="w-3 h-3 text-gray-400" />
+            <ChevronDown className="w-3 h-3 text-[#9D5CFF]" />
           </motion.h1>
           <h1
             style={{ fontFamily: "var(--font-space)" }}
@@ -91,10 +91,10 @@ export function CustomAccordion({
               height: { duration: 0.2 },
               ease: "easeIn",
             }}
-            className={`w-full rounded-b-lg flex flex-col  justify-center items-center overflow-hidden bg-[#3f3c38] relative z-10 ${contentClassName}`}
+            className={`w-full rounded-b-lg flex flex-col  justify-center items-center overflow-hidden bg-[#2D2438] relative z-10 ${contentClassName}`}
           >
             <div
-              className="absolute inset-0 z-[-1] opacity-40  bg-repeat"
+              className="absolute inset-0 z-[-1] opacity-20  bg-repeat"
               style={{
                 backgroundImage: `url('/trade/custom-accordin-bg.svg')`,
                 backgroundSize: "auto",
@@ -110,7 +110,7 @@ export function CustomAccordion({
             >
               {headerText}
             </h1>
-            <div className="p-1 text-white/40">{children}</div>
+            <div className="p-1 text-white/60">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>

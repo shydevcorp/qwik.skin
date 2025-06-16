@@ -11,7 +11,7 @@ export default function GunListHeader({
 
   return (
     <div
-      className={`h-[60px] gap-1 w-full bg-[#383530] flex rounded-t-xl translate-x-[-4px]  px-4  justify-center items-center ${isRev ? "flex-row-reverse" : "flex-row"}`}
+      className={`h-[60px] gap-1 max-[950px]:hidden   w-full bg-[#2D2438] flex rounded-t-xl translate-x-[-4px]  px-4  justify-center items-center ${isRev ? "flex-row-reverse" : "flex-row"}`}
     >
       <div className="relative w-4/10 h-2/3 border border-transparent hover:border-white/20 outline: rounded-md transition-all duration-200">
         <svg
@@ -33,7 +33,7 @@ export default function GunListHeader({
           type="text"
           placeholder="Search inventory..."
           style={{ fontFamily: "var(--font-space)" }}
-          className="w-full h-full bg-white/5   rounded-md pl-10 pr-2 py-1 text-white/80 outline-none placeholder:text-white/50"
+          className="w-full h-full bg-[#1A1625]/40   rounded-md pl-10 pr-2 py-1 text-white/80 outline-none placeholder:text-white/50"
         />
       </div>
       <div className="w-[30%]   h-2/3 rounded-md  flex items-center justify-center">
@@ -44,7 +44,7 @@ export default function GunListHeader({
       </div>
       <div className="w-[10%] h-2/3 flex items-center justify-center rounded-md">
         <svg
-          className="p-[12px] rounded-md text-white/50 hover:bg-[#504c46]  w-full h-full hover:text-white/80 transition-colors cursor-pointer"
+          className="p-3 rounded-md text-white/50 hover:bg-white/5  w-full h-full hover:text-white transition-colors cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
