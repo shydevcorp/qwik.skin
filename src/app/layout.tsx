@@ -1,4 +1,4 @@
-import { Outfit } from "next/font/google";
+import { Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { AuthProvider } from "@/components/SessionProvider";
@@ -6,6 +6,11 @@ import { AuthProvider } from "@/components/SessionProvider";
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
 });
 
 export default function RootLayout({
@@ -22,7 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${outfit.variable} font-sans antialiased bg-gradient-to-br from-[#0A0A0A] via-[#0D0D0D] to-[#0A0A0A] min-h-screen`}
+        className={`${outfit.variable} ${spaceGrotesk.variable} w-screen font-sans antialiased bg-gradient-to-br from-[#0A0A0A] via-[#0D0D0D] to-[#0A0A0A] min-h-screen overflow-x-hidden`}
       >
         <AuthProvider>
           <Navbar />

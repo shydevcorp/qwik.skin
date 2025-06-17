@@ -50,3 +50,45 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[#9945FF] to-[#14F195];
   }
 }
+
+/* Hide number input spinners for Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Hide number input spinners for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.scrollbar-slim-change::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-slim-change::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+  height: 4px;
+}
+
+.scrollbar-slim-change::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+  border: 1px solid #888;
+}
+
+.scrollbar-slim-change::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border: 1px solid #555;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
