@@ -13,8 +13,14 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
-export default function TradeLockAccordion() {
-  const [isTradeLockOpen, setIsTradeLockOpen] = useState(false);
+interface TradeLockAccordionProps {
+  defaultOpen?: boolean;
+}
+
+export default function TradeLockAccordion({
+  defaultOpen = false,
+}: TradeLockAccordionProps) {
+  const [isTradeLockOpen, setIsTradeLockOpen] = useState(defaultOpen);
   const [isTradeLockSelected, setIsTradeLockSelected] = useState(8);
   const colours = [
     "#B388FF", // Lightest purple
@@ -33,6 +39,7 @@ export default function TradeLockAccordion() {
       type="single"
       collapsible
       className="w-full text-black"
+      defaultValue={defaultOpen ? "item-1" : undefined}
       onValueChange={(value) => setIsTradeLockOpen(value === "item-1")}
     >
       <AccordionItem value="item-1" className="overflow-hidden">

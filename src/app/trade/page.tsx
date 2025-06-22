@@ -13,13 +13,13 @@ import MiddleRow from "@/components/middleRow";
 import { MappedGuns } from "@/components/mappedGuns";
 import { SmallScreenTrade } from "@/components/smallScreenTrade";
 import ResponsiveToggle from "@/components/ResponsiveToggle";
+import GunModal from "@/components/gunModal";
 
 export default function TradePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [cookieInfo, setCookieInfo] = useState<string>("Checking cookies...");
   const [host, setHost] = useState<string>("Checking hostname...");
-  const [priceRange, setPriceRange] = useState<number[]>([0, 10000]);
 
   // Responsive toggle state
   const [activeColumn, setActiveColumn] = useState<"user" | "site" | null>(
@@ -31,15 +31,6 @@ export default function TradePage() {
     if (val < 1000) return val.toFixed(2);
     return val.toFixed(0);
   }
-
-  const [minInput, setMinInput] = useState(formatCurrency(priceRange[0]));
-  const [maxInput, setMaxInput] = useState(formatCurrency(priceRange[1]));
-
-  // Keep input fields in sync with slider
-  useEffect(() => {
-    setMinInput(formatCurrency(priceRange[0]));
-    setMaxInput(formatCurrency(priceRange[1]));
-  }, [priceRange]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -160,14 +151,7 @@ export default function TradePage() {
           </div>
           {/* Middle Column */}
           <div className={`max-[950px]:hidden  basis-2/12`}>
-            <MiddleRow
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-              minInput={minInput}
-              setMinInput={setMinInput}
-              maxInput={maxInput}
-              setMaxInput={setMaxInput}
-            />
+            <MiddleRow />
           </div>
           {/* Right Column (Site Inventory) */}
           <div className="basis-3/6 p-4 pb-0 flex flex-col gap-4 h-full ">
