@@ -142,7 +142,7 @@ export default function GunModalLeft({ modalGun }: GunModalLeftProps) {
         >
           <Image
             src="/trade/main.png"
-            alt={modalGun?.marketName}
+            alt={modalGun?.marketName || "Trade main image"}
             width={1000}
             height={1000}
             quality={100}
