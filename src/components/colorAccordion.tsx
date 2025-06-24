@@ -94,7 +94,7 @@ export default function ColorAccordion() {
                               },
                             }}
                           >
-                            <div className="relative w-full h-6 scale-[0.9] brightness-110 rounded-md">
+                            <div className="relative w-full h-6  brightness-110 rounded-md">
                               <div
                                 className="absolute inset-0 rounded-md"
                                 style={{

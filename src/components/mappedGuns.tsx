@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { demoData } from "@/lib/demo-data";
 import { useState } from "react";
+import useAccordionStore from "@/app/stores/accordionStore";
 
 interface MappedGunsProps {
   isResponsive?: boolean;
@@ -9,7 +10,7 @@ interface MappedGunsProps {
 
 export function MappedGuns({ isResponsive = false }: MappedGunsProps) {
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
-
+  const { setModalGun } = useAccordionStore();
   const getDaysUntilTradeable = (tradableAfter: string) => {
     const tradableDate = new Date(tradableAfter);
     const today = new Date();
@@ -115,7 +116,12 @@ export function MappedGuns({ isResponsive = false }: MappedGunsProps) {
                       height={16}
                     />
                   </div>
-                  <div className="h-full w-full bg-[#6E3AE4] flex mt-[2px] items-center justify-center">
+                  <div
+                    onClick={() => {
+                      setModalGun(item);
+                    }}
+                    className="h-full w-full cursor-pointer bg-[#6E3AE4] hover:bg-[#6E3AE4]/70 transition-all duration-200 flex mt-[2px] items-center justify-center"
+                  >
                     <Image
                       src="/trade/zoom.svg"
                       alt="zoom"
