@@ -19,6 +19,9 @@ importers:
       "@mui/material":
         specifier: ^7.1.0
         version: 7.1.0(@emotion/react@11.14.0(@types/react@19.1.0)(react@19.1.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.1.0)(react@19.1.0))(@types/react@19.1.0)(react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      "@number-flow/react":
+        specifier: ^0.5.10
+        version: 0.5.10(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       "@prisma/client":
         specifier: ^6.8.2
         version: 6.8.2(prisma@6.8.2(typescript@5.0.4))(typescript@5.0.4)
@@ -2539,6 +2542,15 @@ packages:
         integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==,
       }
     engines: { node: ">= 8" }
+
+  "@number-flow/react@0.5.10":
+    resolution:
+      {
+        integrity: sha512-a8Wh5eNITn7Km4xbddAH7QH8eNmnduR6k34ER1hkHSGO4H2yU1DDnuAWLQM99vciGInFODemSc0tdxrXkJEpbA==,
+      }
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
 
   "@panva/hkdf@1.2.1":
     resolution:
@@ -7411,6 +7423,12 @@ packages:
       }
     engines: { node: ">=8.0.0" }
 
+  esm-env@1.2.2:
+    resolution:
+      {
+        integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==,
+      }
+
   esprima@4.0.1:
     resolution:
       {
@@ -9351,6 +9369,12 @@ packages:
     resolution:
       {
         integrity: sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw==,
+      }
+
+  number-flow@0.5.8:
+    resolution:
+      {
+        integrity: sha512-FPr1DumWyGi5Nucoug14bC6xEz70A1TnhgSHhKyfqjgji2SOTz+iLJxKtv37N5JyJbteGYCm6NQ9p1O4KZ7iiA==,
       }
 
   oauth4webapi@3.4.1:
@@ -13691,6 +13715,13 @@ snapshots:
       "@nodelib/fs.scandir": 2.1.5
       fastq: 1.19.1
 
+  "@number-flow/react@0.5.10(react-dom@19.1.0(react@19.1.0))(react@19.1.0)":
+    dependencies:
+      esm-env: 1.2.2
+      number-flow: 0.5.8
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   "@panva/hkdf@1.2.1": {}
 
   "@particle-network/analytics@1.0.2":
@@ -17735,6 +17766,8 @@ snapshots:
       esrecurse: 4.3.0
       estraverse: 4.3.0
 
+  esm-env@1.2.2: {}
+
   esprima@4.0.1: {}
 
   esrecurse@4.3.0:
@@ -18947,6 +18980,10 @@ snapshots:
       boolbase: 1.0.0
 
   nullthrows@1.1.1: {}
+
+  number-flow@0.5.8:
+    dependencies:
+      esm-env: 1.2.2
 
   oauth4webapi@3.4.1: {}
 

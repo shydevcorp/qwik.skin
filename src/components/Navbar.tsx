@@ -155,7 +155,7 @@ export function Navbar() {
   const isLandingRoute = pathname === "/";
 
   const navItems = [
-    { name: "Trade", path: "/trade", icon: "/navbar/trade.svg" },
+    { name: "Trade Skins", path: "/trade", icon: "/navbar/trade.svg" },
     {
       name: "Freebies",
       path: "/free-csgo-skins",
@@ -232,6 +232,7 @@ export function Navbar() {
                       <img
                         src={item.icon}
                         alt=""
+                        style={{ fontFamily: "var(--font-space)" }}
                         className={`w-4 h-4 fill-current transition-all duration-200 ${isActive ? "" : "grayscale-[1] group-hover:grayscale-0"}`}
                       />
                       {item.name}

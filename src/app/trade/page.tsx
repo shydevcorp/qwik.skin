@@ -13,14 +13,14 @@ import MiddleRow from "@/components/middleRow";
 import { MappedGuns } from "@/components/mappedGuns";
 import { SmallScreenTrade } from "@/components/smallScreenTrade";
 import ResponsiveToggle from "@/components/ResponsiveToggle";
-import GunModal from "@/components/gunModal";
+import useGunStore from "@/app/stores/gunStore";
 
 export default function TradePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [cookieInfo, setCookieInfo] = useState<string>("Checking cookies...");
   const [host, setHost] = useState<string>("Checking hostname...");
-
+  const { totalValue } = useGunStore();
   // Responsive toggle state
   const [activeColumn, setActiveColumn] = useState<"user" | "site" | null>(
     "user",
@@ -157,7 +157,11 @@ export default function TradePage() {
           <div className="basis-3/6 p-4 pb-0 flex flex-col gap-4 h-full ">
             <CustomAccordion
               title="You Recieve"
-              value={0}
+              value={Number(
+                totalValue.toString().slice(0, -2) +
+                  "." +
+                  totalValue.toString().slice(-2),
+              )}
               className=""
               contentClassName="bg-[#2D2438] h-[150px] text-white"
               headerClassName="bg-[#2D2438] text-white"
