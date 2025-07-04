@@ -58,7 +58,7 @@ const HelpSixCard: React.FC = () => {
         Topics
       </h1>
 
-      <div className="w-full grid grid-cols-3 gap-6 mt-4">
+      <div className="w-full grid grid-cols-1 min-[600px]:grid-cols-3 gap-6 mt-4">
         {topics.map((topic, idx) => {
           const Icon = topic.icon;
           return (

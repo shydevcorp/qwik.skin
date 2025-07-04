@@ -37,7 +37,7 @@ const HelpTwoCol = () => {
         Frequently Read Articles
       </h1>
 
-      <div className="w-full grid grid-cols-2 gap-4 mt-4">
+      <div className="w-full grid grid-cols-1 min-[600px]:grid-cols-2 gap-4 mt-4">
         {articles.map((article, idx) => (
           <a
             key={idx}

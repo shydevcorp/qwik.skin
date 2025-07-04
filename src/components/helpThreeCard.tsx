@@ -36,16 +36,16 @@ const HelpThreeCard = () => {
       >
         Get Started with <span className="text-white">SkinsMonkey</span>
       </h1>
-      <div className="w-full flex gap-3 mt-4">
+      <div className="w-full flex max-[500px]:overflow-x-auto max-[500px]:pb-4 mt-4 gap-3 max-[500px]:snap-x">
         {cards.map((card, idx) => (
           <a
             key={idx}
             href={card.href}
             className={`
-              w-1/3 h-[300px] bg-[#232126]  rounded-lg flex flex-col
+              max-[500px]:min-w-[85%] max-[500px]:snap-center w-1/3 h-[300px] bg-[#232126] rounded-lg flex flex-col
               transition-all duration-200
               hover:brightness-125
-              group
+              group 
               shadow-md
               hover:shadow-xl
               hover:-translate-y-1
@@ -58,7 +58,7 @@ const HelpThreeCard = () => {
             style={{ fontFamily: "var(--font-space)" }}
           >
             {/* Card image on top */}
-            <div className="w-full h-[140px]  flex items-center justify-center rounded-t-lg  relative">
+            <div className="w-full h-[140px] flex items-center justify-center rounded-t-lg relative">
               <img
                 src={card.image}
                 alt="help card"
