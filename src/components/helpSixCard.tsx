@@ -1,59 +1,54 @@
 import React from "react";
+import { IconBaseProps } from "react-icons";
 import {
-  MdSettings,
-  MdSwapHoriz,
-  MdCreditCard,
-  MdInventory,
-  MdPerson,
-  MdSecurity,
-} from "react-icons/md";
+  Settings,
+  ArrowLeftRight,
+  CreditCard,
+  Package,
+  User,
+  Shield,
+} from "lucide-react";
 
-const topics = [
+interface Topic {
+  title: string;
+  icon: React.ComponentType<IconBaseProps>;
+  href: string;
+}
+
+const topics: Topic[] = [
   {
     title: "General",
-    icon: (
-      <MdSettings className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
-    ),
+    icon: Settings,
     href: "/",
   },
   {
     title: "Trading",
-    icon: (
-      <MdSwapHoriz className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
-    ),
+    icon: ArrowLeftRight,
     href: "/",
   },
   {
     title: "Deposit",
-    icon: (
-      <MdCreditCard className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
-    ),
+    icon: CreditCard,
     href: "/",
   },
   {
     title: "Items",
-    icon: (
-      <MdInventory className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
-    ),
+    icon: Package,
     href: "/",
   },
   {
     title: "Account",
-    icon: (
-      <MdPerson className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
-    ),
+    icon: User,
     href: "/",
   },
   {
     title: "Security",
-    icon: (
-      <MdSecurity className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
-    ),
+    icon: Shield,
     href: "/",
   },
 ];
 
-const HelpSixCard = () => {
+const HelpSixCard: React.FC = () => {
   return (
     <div className="w-full flex flex-col justify-center">
       <h1
@@ -64,22 +59,25 @@ const HelpSixCard = () => {
       </h1>
 
       <div className="w-full grid grid-cols-3 gap-6 mt-4">
-        {topics.map((topic, idx) => (
-          <a
-            key={idx}
-            href={topic.href}
-            className="w-full py-4 bg-[#232126] rounded-md flex items-center px-5 text-white/80 text-base font-medium transition hover:bg-[#2c2a30] focus:outline-none focus:ring-2 focus:ring-lime-500 cursor-pointer group"
-            style={{ fontFamily: "var(--font-space)" }}
-          >
-            <span className="flex items-center flex-1">
-              {topic.icon}
-              {topic.title}
-            </span>
-            <span className="ml-2 text-white/40 text-lg group-hover:text-white/60 transition">
-              {">"}
-            </span>
-          </a>
-        ))}
+        {topics.map((topic, idx) => {
+          const Icon = topic.icon;
+          return (
+            <a
+              key={idx}
+              href={topic.href}
+              className="w-full py-4 bg-[#232126] rounded-md flex items-center px-5 text-white/80 text-base font-medium transition hover:bg-[#2c2a30] focus:outline-none focus:ring-2 focus:ring-lime-500 cursor-pointer group"
+              style={{ fontFamily: "var(--font-space)" }}
+            >
+              <span className="flex items-center flex-1">
+                <Icon className="text-xl mr-2 transition-all duration-300 group-hover:text-violet-500" />
+                {topic.title}
+              </span>
+              <span className="ml-2 text-white/40 text-lg group-hover:text-white/60 transition">
+                {">"}
+              </span>
+            </a>
+          );
+        })}
       </div>
     </div>
   );
