@@ -6,14 +6,28 @@ import {
 } from "@/components/ui/accordion";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckIcon } from "lucide-react";
+import { useState } from "react";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 export default function OtherAccordion() {
+  const [isOtherOpen, setIsOtherOpen] = useState(false);
+  const statTrak = useFilterStore((s) => s.statTrak);
+  const setStatTrak = useFilterStore((s) => s.setStatTrak);
+
+  const options = [
+    {
+      label: "StatTrak™",
+      value: statTrak,
+      onClick: () => setStatTrak(statTrak === true ? null : true),
+    },
+  ];
+
   return (
     <Accordion
       type="single"
       collapsible
       className="w-full text-black"
-      onValueChange={(value) => {}}
+      onValueChange={(value) => setIsOtherOpen(value === "item-1")}
     >
       <AccordionItem value="item-1" className="overflow-hidden">
         <AccordionTrigger
@@ -24,7 +38,7 @@ export default function OtherAccordion() {
         </AccordionTrigger>
         <AccordionContent className="px-1 py-1">
           <AnimatePresence mode="wait">
-            {true && (
+            {isOtherOpen && (
               <motion.div
                 className="w-full flex items-center justify-center flex-col py-2"
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -43,7 +57,7 @@ export default function OtherAccordion() {
                   ease: "easeOut",
                 }}
               >
-                {["StatTrak™", "Trade Locked"].map((option, index) => (
+                {options.map((option, index) => (
                   <motion.div
                     key={index}
                     className="h-8 w-full flex items-center px-2 rounded-md"
@@ -62,7 +76,7 @@ export default function OtherAccordion() {
                       x: -5,
                       transition: {
                         duration: 0.2,
-                        delay: (1 - index) * 0.03,
+                        delay: (options.length - 1 - index) * 0.03,
                         ease: "easeInOut",
                       },
                     }}
@@ -75,17 +89,18 @@ export default function OtherAccordion() {
                     <div
                       className="flex items-center gap-2 opacity-80 hover:text-white text-gray-300 justify-start 
                         cursor-pointer group transition-opacity hover:opacity-100 w-full"
+                      onClick={option.onClick}
                     >
                       <div
                         className="w-4 h-4 rounded flex items-center justify-center transition-colors 
                           border border-gray-400 group-hover:bg-[#9D5CFF]"
                       >
-                        {false && (
+                        {option.value === true && (
                           <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
                         )}
                       </div>
                       <span className="transition-opacity opacity-80 group-hover:opacity-100 text-md tracking-wide">
-                        {option}
+                        {option.label}
                       </span>
                     </div>
                   </motion.div>

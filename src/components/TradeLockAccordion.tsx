@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 interface TradeLockAccordionProps {
   defaultOpen?: boolean;
@@ -21,7 +22,9 @@ export default function TradeLockAccordion({
   defaultOpen = false,
 }: TradeLockAccordionProps) {
   const [isTradeLockOpen, setIsTradeLockOpen] = useState(defaultOpen);
-  const [isTradeLockSelected, setIsTradeLockSelected] = useState(8);
+  const tradeLocked = useFilterStore((s) => s.tradeLocked);
+  const setTradeLocked = useFilterStore((s) => s.setTradeLocked);
+
   const colours = [
     "#B388FF", // Lightest purple
     "#A379FF",
@@ -33,6 +36,23 @@ export default function TradeLockAccordion({
     "#491FFF",
     "#3A10FF", // Darkest purple
   ];
+
+  // Convert tradeLocked state to slider value
+  const getSliderValue = () => {
+    if (tradeLocked === null) return 8; // Default to end (no filter)
+    if (tradeLocked === true) return 0; // Start (trade locked only)
+    return 4; // Middle (not trade locked)
+  };
+
+  const handleSliderChange = (index: number) => {
+    if (index === 8) {
+      setTradeLocked(null); // No filter
+    } else if (index <= 2) {
+      setTradeLocked(true); // Trade locked
+    } else {
+      setTradeLocked(false); // Not trade locked
+    }
+  };
 
   return (
     <Accordion
@@ -133,7 +153,7 @@ export default function TradeLockAccordion({
                     <div
                       className="absolute inset-0 bg-white origin-right"
                       style={{
-                        width: `  ${(isTradeLockSelected / (colours.length - 1)) * 100}%`,
+                        width: `  ${(getSliderValue() / (colours.length - 1)) * 100}%`,
                         maskImage: "linear-gradient(to right, black, black)",
                         WebkitMaskImage:
                           "linear-gradient(to right, black, black)",
@@ -149,7 +169,7 @@ export default function TradeLockAccordion({
                     <motion.div
                       key={index}
                       draggable={false}
-                      onClick={() => setIsTradeLockSelected(index)}
+                      onClick={() => handleSliderChange(index)}
                       onDragOver={(e) => {
                         e.preventDefault();
                       }}
@@ -158,14 +178,12 @@ export default function TradeLockAccordion({
                         const draggedIndex = parseInt(
                           e.dataTransfer.getData("index"),
                         );
-                        setIsTradeLockSelected(index);
+                        handleSliderChange(draggedIndex);
                       }}
                       className={`w-5 h-4 cursor-pointer relative transition-colors duration-300  flex items-end justify-center`}
                       style={{
                         backgroundColor:
-                          Number(isTradeLockSelected) >= index
-                            ? color
-                            : "#383530",
+                          getSliderValue() >= index ? color : "#383530",
                       }}
                       whileHover={{
                         scale: 1.15,
@@ -184,7 +202,7 @@ export default function TradeLockAccordion({
                         whileHover={{ opacity: 1 }}
                       ></motion.div>
                       <AnimatePresence>
-                        {isTradeLockSelected === index && (
+                        {getSliderValue() === index && (
                           <motion.div
                             className="absolute bottom-0 left-0 w-full h-0 border-transparent border-b-white border-b-[16px] border-l-[10px] border-r-[10px] translate-y-1 z-10"
                             initial={{ opacity: 0, scale: 0.5 }}
@@ -208,9 +226,11 @@ export default function TradeLockAccordion({
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                 >
-                  {isTradeLockSelected === 0
-                    ? "No trade lock"
-                    : `${isTradeLockSelected} day${isTradeLockSelected > 1 ? "s" : ""} trade lock`}
+                  {tradeLocked === null
+                    ? "No filter"
+                    : tradeLocked === true
+                      ? "Trade locked only"
+                      : "Not trade locked"}
                 </motion.div>
               </motion.div>
             )}

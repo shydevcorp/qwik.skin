@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { demoData } from "@/lib/demo-data";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useAccordionStore from "@/app/stores/accordionStore";
 import useGunStore from "@/app/stores/gunStore";
 import { GunItem } from "./mappedGunItem";
+import { useFilterStore } from "@/app/stores/filterStore";
+import { applyFilters } from "@/lib/filterItems";
 
 interface MappedGunsProps {
   isResponsive?: boolean;
@@ -13,6 +15,33 @@ interface MappedGunsProps {
 const MappedGuns = ({ isResponsive = false }: MappedGunsProps) => {
   const { setModalGun } = useAccordionStore();
   const { guns, setGuns, toggleGun } = useGunStore();
+  const filters = useFilterStore((s) => s);
+  const filteredData = React.useMemo(
+    () => applyFilters(demoData, filters),
+    [filters],
+  );
+
+  const sortOption = filters.sortOption;
+
+  const sortedData = React.useMemo(() => {
+    const arr = [...filteredData];
+    switch (sortOption) {
+      case "Price: Max":
+        return arr.sort((a, b) => b.item.price - a.item.price);
+      case "Price: Min":
+        return arr.sort((a, b) => a.item.price - b.item.price);
+      case "Float: Max":
+        return arr.sort(
+          (a, b) => (b.game730?.paintWear ?? 0) - (a.game730?.paintWear ?? 0),
+        );
+      case "Float: Min":
+        return arr.sort(
+          (a, b) => (a.game730?.paintWear ?? 0) - (b.game730?.paintWear ?? 0),
+        );
+      default:
+        return arr;
+    }
+  }, [filteredData, sortOption]);
   const [screenWidth, setScreenWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0,
   );
@@ -50,7 +79,7 @@ const MappedGuns = ({ isResponsive = false }: MappedGunsProps) => {
           : "max-[400px]:grid-cols-2 min-[401px]:grid-cols-3 min-[501px]:grid-cols-4 min-[601px]:grid-cols-5 min-[751px]:grid-cols-6 min-[951px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 overflow-y-scroll"
       } overflow-x-visible`}
     >
-      {demoData.map((item, index) => (
+      {sortedData.map((item, index) => (
         <GunItem
           key={index}
           item={item}

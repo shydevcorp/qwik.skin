@@ -3,6 +3,7 @@ import AccordionBasic from "./accordionBasic";
 import AdvancedAccordion from "./advancedAccordion";
 import { AnimatePresence, motion } from "framer-motion";
 import useAccordionStore from "@/app/stores/accordionStore";
+import { useFilterStore } from "@/app/stores/filterStore";
 import useGunStore from "@/app/stores/gunStore";
 import NumberFlow from "@number-flow/react";
 
@@ -37,6 +38,7 @@ export default function MiddleRow() {
   const { totalValue } = useGunStore();
   const { priceRange, setMinInput, setMaxInput, resetFilters } =
     useAccordionStore();
+  const resetAllFilters = useFilterStore((s) => s.resetFilters);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -148,7 +150,8 @@ export default function MiddleRow() {
         style={{ fontFamily: "var(--font-space)" }}
         className="w-full text-center font-medium self-start min-h-fit h-10 text-white px-4 py-2 rounded-md bg-transparent border border-[#9D5CFF]/20 hover:bg-[#9D5CFF]/10 transition-colors flex items-center justify-center mt-auto mb-4"
         onClick={() => {
-          resetFilters();
+          resetFilters(); // keep old UI values reset
+          resetAllFilters();
         }}
       >
         Reset filters

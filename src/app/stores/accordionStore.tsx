@@ -37,11 +37,11 @@ interface AccordionStore {
 
 const useAccordionStore = create<AccordionStore>((set) => ({
   // Price related states
-  priceRange: [0, 10000],
+  priceRange: [0, 50000],
   setPriceRange: (priceRange) => set({ priceRange }),
   minInput: "0.00",
   setMinInput: (minInput) => set({ minInput }),
-  maxInput: "10000",
+  maxInput: "50000",
   setMaxInput: (maxInput) => set({ maxInput }),
   text: "Price",
 

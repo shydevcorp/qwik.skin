@@ -13,9 +13,12 @@ import {
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 export default function ColorAccordion() {
   const [isColorOpen, setIsColorOpen] = useState(false);
+  const selectedColors = useFilterStore((s) => s.selectedColors);
+  const toggleColor = useFilterStore((s) => s.toggleColor);
 
   const colors = [
     { hex: "#1D1D1B", name: "Black" },
@@ -93,6 +96,7 @@ export default function ColorAccordion() {
                                 ease: "easeInOut",
                               },
                             }}
+                            onClick={() => toggleColor(color.name)}
                           >
                             <div className="relative w-full h-6  brightness-110 rounded-md">
                               <div
@@ -106,6 +110,9 @@ export default function ColorAccordion() {
                                 style={{
                                   background: `linear-gradient(135deg, ${color.hex}60 50%, transparent 50%)`,
                                   boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                                  outline: selectedColors.includes(color.name)
+                                    ? "2px solid #9D5CFF"
+                                    : "none",
                                 }}
                               />
                             </div>
