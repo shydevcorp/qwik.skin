@@ -110,9 +110,6 @@ export default function ColorAccordion() {
                                 style={{
                                   background: `linear-gradient(135deg, ${color.hex}60 50%, transparent 50%)`,
                                   boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                                  outline: selectedColors.includes(color.name)
-                                    ? "2px solid #9D5CFF"
-                                    : "none",
                                 }}
                               />
                             </div>

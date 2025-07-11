@@ -1,5 +1,3 @@
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { demoData } from "@/lib/demo-data";
 import React, { useState, useEffect } from "react";
 import useAccordionStore from "@/app/stores/accordionStore";
@@ -79,6 +77,17 @@ const MappedGuns = ({ isResponsive = false }: MappedGunsProps) => {
           : "max-[400px]:grid-cols-2 min-[401px]:grid-cols-3 min-[501px]:grid-cols-4 min-[601px]:grid-cols-5 min-[751px]:grid-cols-6 min-[951px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 overflow-y-scroll"
       } overflow-x-visible`}
     >
+      {sortedData.map((item, index) => (
+        <GunItem
+          key={index}
+          item={item}
+          index={index}
+          isResponsive={isResponsive}
+          isSelected={guns.includes(item.uniqueId.toString())}
+          toggleGun={() => handleGunClick(item, index)}
+          setModalGun={setModalGun}
+        />
+      ))}
       {sortedData.map((item, index) => (
         <GunItem
           key={index}

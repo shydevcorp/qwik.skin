@@ -26,6 +26,8 @@ import {
   Receipt,
   Shield,
   LogOut,
+  Plus,
+  Percent,
 } from "lucide-react";
 
 function NavbarErrorHandler() {
@@ -450,26 +452,40 @@ export function Navbar() {
                         </Avatar>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuContent
+                      align="end"
+                      className="w-56 bg-[#1A1625] border-[#2D2438]"
+                    >
+                      <div className="px-3 py-2 text-sm text-gray-400">
+                        Signed in as
+                      </div>
+                      <div className="px-3 pb-2 text-sm font-medium text-white">
+                        {session.user?.name || "User"}
+                      </div>
+                      <DropdownMenuSeparator className="bg-[#2D2438]" />
                       <DropdownMenuItem
-                        className="cursor-pointer text-foreground focus:text-foreground hover:bg-[#2D2438]/50 !hover:bg-[#2D2438] !focus:bg-[#2D2438] !focus:text-[#9D5CFF]"
-                        onClick={() => router.push("/profile")}
+                        className="cursor-pointer text-gray-300 focus:text-white hover:bg-[#2D2438]/50 focus:bg-[#2D2438] flex items-center gap-2"
+                        onClick={() => router.push("/account/settings")}
                       >
-                        Profile
+                        <User className="h-4 w-4" />
+                        Personal Area
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="cursor-pointer text-foreground focus:text-foreground hover:bg-[#2D2438]/50 !hover:bg-[#2D2438] !focus:bg-[#2D2438] !focus:text-[#9D5CFF]"
-                        onClick={() => router.push("/settings")}
+                        className="cursor-pointer text-gray-300 focus:text-white hover:bg-[#2D2438]/50 focus:bg-[#2D2438] flex items-center gap-2"
+                        onClick={() => router.push("/account/transactions")}
                       >
-                        Settings
+                        <Receipt className="h-4 w-4" />
+                        Transactions
                       </DropdownMenuItem>
+                      <DropdownMenuSeparator className="bg-[#2D2438]" />
                       <DropdownMenuItem
-                        className="cursor-pointer text-foreground focus:text-foreground hover:bg-[#2D2438]/50 !hover:bg-[#2D2438] !focus:bg-[#2D2438] !focus:text-[#9D5CFF]"
+                        className="cursor-pointer text-red-400 focus:text-red-300 hover:bg-[#2D2438]/50 focus:bg-[#2D2438] flex items-center gap-2"
                         onClick={() => {
                           signOut({ redirect: true, callbackUrl: "/" });
                         }}
                       >
-                        Sign out
+                        <LogOut className="h-4 w-4" />
+                        Sign Out
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
