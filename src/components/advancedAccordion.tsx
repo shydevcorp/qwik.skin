@@ -1,9 +1,3 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import TradeLockAccordion from "./TradeLockAccordion";
 import { AnimatePresence, motion } from "framer-motion";
 import OtherAccordion from "./otherAccordion";

@@ -5,13 +5,17 @@ export default function GunModalRight({
   modalGun: any;
   setModalGun: any;
 }) {
+  const screenWidth = window.innerWidth;
+
   return (
     <section
       style={{
         maskImage:
-          "linear-gradient(to bottom,transparent,black 15%,black 85%,transparent)",
+          screenWidth >= 949
+            ? "linear-gradient(to bottom,transparent,black 15%,black 85%,transparent)"
+            : "none",
       }}
-      className="w-[40%] min-h-full overflow-y-auto no-scrollbar gap-2 flex flex-col items-center pb-12 p-2 px-4"
+      className="w-full min-[949px]:w-[40%] h-fit min-[949px]:h-full    overflow-y-auto no-scrollbar gap-2 flex flex-col items-center pb-12 p-2 px-4"
     >
       <div className="w-full h-fit flex items-start justify-between py-2">
         <div
@@ -21,17 +25,19 @@ export default function GunModalRight({
           {" "}
           Summary
         </div>
-        <svg
-          onClick={() => setModalGun(null)}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          className="translate-x-3 w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors"
-        >
-          <path
-            fill="currentColor"
-            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-          />
-        </svg>
+        {screenWidth >= 949 && (
+          <svg
+            onClick={() => setModalGun(null)}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="translate-x-3 w-5 h-5 text-white/50 hover:text-white cursor-pointer transition-colors"
+          >
+            <path
+              fill="currentColor"
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
+        )}
       </div>
 
       <div className="w-full h-fit flex flex-col gap-4">

@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+"use client";
+
+import React from "react";
 import { SortDropdown, GameDropdown } from "@/components/sortDropDown";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 export default function GunListHeader({
   isRev = false,
 }: {
   isRev: boolean | null;
 }) {
-  const [sortOption, setSortOption] = useState<string>("Price: Max");
-  const [gameOption, setGameOption] = useState<string>("C2");
+  const sortOption = useFilterStore((s) => s.sortOption);
+  const setSortOption = useFilterStore((s) => s.setSortOption);
+  const [gameOption, setGameOption] = React.useState<string>("C2");
+
+  const searchText = useFilterStore((s) => s.search);
+  const setSearchText = useFilterStore((s) => s.setSearch);
 
   return (
     <div
@@ -31,6 +38,8 @@ export default function GunListHeader({
         </svg>
         <input
           type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
           placeholder="Search inventory..."
           style={{ fontFamily: "var(--font-space)" }}
           className="w-full h-full bg-[#1A1625]/40   rounded-md pl-10 pr-2 py-1 text-white/80 outline-none placeholder:text-white/50"

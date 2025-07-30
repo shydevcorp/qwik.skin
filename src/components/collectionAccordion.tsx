@@ -6,7 +6,8 @@ import {
 } from "@/components/ui/accordion";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckIcon } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 export default function CollectionAccordion({
   collections,
@@ -14,6 +15,17 @@ export default function CollectionAccordion({
   collections: any;
 }) {
   const [showList, setShowList] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const selectedCollections = useFilterStore((s) => s.selectedCollections);
+  const toggleCollection = useFilterStore((s) => s.toggleCollection);
+
+  const filteredCollections = useMemo(() => {
+    if (!searchTerm) return collections;
+    return collections.filter((collection: string) =>
+      collection.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  }, [collections, searchTerm]);
+
   return (
     <Accordion type="single" collapsible className="w-full text-black">
       <AccordionItem value="item-1" className="overflow-hidden">
@@ -49,9 +61,11 @@ export default function CollectionAccordion({
                     <input
                       type="text"
                       placeholder="Search collections..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                       className="w-full h-8 px-8 rounded-md bg-[#2A2A2A] text-white text-sm border border-gray-600 focus:outline-none focus:border-[#9D5CFF]"
                       onFocus={() => setShowList(true)}
-                      onBlur={() => setShowList(false)}
+                      onBlur={() => setTimeout(() => setShowList(false), 150)}
                     />
                     <svg
                       className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
@@ -85,7 +99,7 @@ export default function CollectionAccordion({
                         height: 0,
                       }}
                     >
-                      {collections.map((collection, index) => (
+                      {filteredCollections.map((collection, index) => (
                         <motion.div
                           key={index}
                           className="h-8 w-full flex items-center px-2 rounded-md"
@@ -97,9 +111,12 @@ export default function CollectionAccordion({
                             ease: "easeInOut",
                           }}
                         >
-                          <div className="flex items-center gap-2 opacity-80 hover:text-white justify-start cursor-pointer group transition-opacity hover:opacity-100 w-full">
+                          <div
+                            className="flex items-center gap-2 opacity-80 hover:text-white justify-start cursor-pointer group transition-opacity hover:opacity-100 w-full"
+                            onMouseDown={() => toggleCollection(collection)}
+                          >
                             <div className="w-4 h-4 rounded flex items-center justify-center transition-colors border border-gray-400 group-hover:bg-[#9D5CFF]">
-                              {false && (
+                              {selectedCollections.includes(collection) && (
                                 <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
                               )}
                             </div>

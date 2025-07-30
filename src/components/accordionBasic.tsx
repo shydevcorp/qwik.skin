@@ -14,13 +14,14 @@ import OtherAccordion from "./otherAccordion";
 import { useState } from "react";
 import PriceAccordion from "./priceAccordion";
 import useAccordionStore from "@/app/stores/accordionStore";
+import { useFilterStore, ExteriorOption } from "@/app/stores/filterStore";
 
 interface AccordionBasicProps {
   isAdditionalFiltersOpen: boolean;
   setIsAdditionalFiltersOpen: (value: boolean) => void;
 }
 
-const EXTERIOR_OPTIONS = [
+const EXTERIOR_OPTIONS: ExteriorOption[] = [
   "Other",
   "Factory New",
   "Minimal Wear",
@@ -43,7 +44,10 @@ export default function AccordionBasic({
     text,
   } = useAccordionStore();
 
-  const renderExteriorOption = (option: string, index: number) => (
+  const selectedExteriors = useFilterStore((s) => s.selectedExteriors);
+  const toggleExterior = useFilterStore((s) => s.toggleExterior);
+
+  const renderExteriorOption = (option: ExteriorOption, index: number) => (
     <motion.div
       key={index}
       className="h-8 w-full flex items-center px-2 rounded-md"
@@ -75,12 +79,15 @@ export default function AccordionBasic({
       <div
         className="flex items-center gap-2 opacity-80 hover:text-white text-gray-300 justify-start 
         cursor-pointer group transition-opacity hover:opacity-100 w-full"
+        onClick={() => toggleExterior(option)}
       >
         <div
           className="w-4 h-4 rounded flex items-center justify-center transition-colors 
           border border-gray-400 group-hover:bg-[#9D5CFF]"
         >
-          {false && <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />}
+          {selectedExteriors.includes(option) && (
+            <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
+          )}
         </div>
         <span className="transition-opacity opacity-80 group-hover:opacity-100 text-md tracking-wide">
           {option}

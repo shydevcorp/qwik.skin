@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { CheckIcon } from "lucide-react";
 import { Slider } from "@mui/material";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 interface PriceAccordionProps {
   priceRange: number[];
@@ -29,12 +30,19 @@ export default function PriceAccordion({
   text,
 }: PriceAccordionProps) {
   const [isPriceRangeOpen, setIsPriceRangeOpen] = useState(true);
+  const setRangeInStore = useFilterStore((s) =>
+    text === "Price"
+      ? s.setPriceRange
+      : text === "Float"
+        ? s.setFloatRange
+        : s.setFadeRange,
+  );
   const [affordableOnly, setAffordableOnly] = useState<boolean>(false);
   const [hasHover, setHasHover] = useState(false);
 
   // Get the actual min/max values for the slider
   const sliderMin = text === "Fade" ? 78 : text === "Float" ? 0 : 0;
-  const sliderMax = text === "Fade" ? 100 : text === "Float" ? 1 : 10000;
+  const sliderMax = text === "Fade" ? 100 : text === "Float" ? 1 : 50000;
   const sliderStep = text === "Float" ? 0.00001 : text === "Fade" ? 1 : 100;
 
   // Handle price range slider changes
@@ -45,6 +53,7 @@ export default function PriceAccordion({
 
     if (min !== priceRange[0] || max !== priceRange[1]) {
       setPriceRange([min, max]);
+      setRangeInStore([min, max]);
       setMinInput(min.toFixed(text === "Float" ? 5 : 0));
       setMaxInput(max.toFixed(text === "Float" ? 5 : 0));
     }
@@ -60,6 +69,7 @@ export default function PriceAccordion({
       // Don't allow min to exceed max - step
       const newMin = Math.min(num, priceRange[1] - sliderStep);
       setPriceRange([Math.max(sliderMin, newMin), priceRange[1]]);
+      setRangeInStore([Math.max(sliderMin, newMin), priceRange[1]]);
     }
   };
 
@@ -73,6 +83,7 @@ export default function PriceAccordion({
       // Don't allow max to be less than min + step
       const newMax = Math.max(num, priceRange[0] + sliderStep);
       setPriceRange([priceRange[0], Math.min(sliderMax, newMax)]);
+      setRangeInStore([priceRange[0], Math.min(sliderMax, newMax)]);
     }
   };
 

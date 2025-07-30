@@ -3,23 +3,42 @@ import AccordionBasic from "./accordionBasic";
 import AdvancedAccordion from "./advancedAccordion";
 import { AnimatePresence, motion } from "framer-motion";
 import useAccordionStore from "@/app/stores/accordionStore";
+import { useFilterStore } from "@/app/stores/filterStore";
+import useGunStore from "@/app/stores/gunStore";
+import NumberFlow from "@number-flow/react";
 
 const formatCurrency = (val: number) => {
   if (val < 1000) return val.toFixed(2);
   return val.toFixed(0);
 };
 
+export function TradeValue() {
+  const { totalValue } = useGunStore();
+  return (
+    <span style={{ fontFamily: "var(--font-space)" }}>
+      $&nbsp;
+      <NumberFlow
+        value={Number(
+          totalValue.toString().slice(0, -2) +
+            "." +
+            totalValue.toString().slice(-2),
+        )}
+        trend={0}
+        format={{ notation: "standard" }}
+      />
+    </span>
+  );
+}
+
 export default function MiddleRow() {
-  const [affordableOnly, setAffordableOnly] = useState<boolean>(false);
   const [isAdditionalFiltersOpen, setIsAdditionalFiltersOpen] = useState(false);
-  const [isExteriorOpen, setIsExteriorOpen] = useState(false);
-  const [isTypeOpen, setIsTypeOpen] = useState(false);
   const [accordionType, setAccordionType] = useState<"basic" | "advanced">(
     "basic",
   );
-
+  const { totalValue } = useGunStore();
   const { priceRange, setMinInput, setMaxInput, resetFilters } =
     useAccordionStore();
+  const resetAllFilters = useFilterStore((s) => s.resetFilters);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -36,6 +55,40 @@ export default function MiddleRow() {
       <button className="w-full text-center font-semibold self-start min-h-fit h-10 text-[#1A1625] p-4 rounded-md bg-[#9D5CFF]">
         Trade items
       </button>
+      <AnimatePresence>
+        {totalValue > 0 && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              height: 0,
+              padding: "0px 0.5rem",
+              filter: "blur(2px)",
+            }}
+            animate={{
+              opacity: 1,
+              height: "auto",
+              padding: "0.5rem 0.5rem",
+              filter: "blur(0px)",
+            }}
+            exit={{
+              opacity: 0,
+              height: 0,
+              padding: "0px 0.5rem",
+              filter: "blur(2px)",
+            }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="w-full text-center font-semibold self-start text-white/80 px-2 rounded-md bg-[#2D2438] flex items-center flex-col justify-center overflow-hidden"
+          >
+            <TradeValue />
+            <span
+              style={{ fontFamily: "var(--font-space)" }}
+              className="text-white/40 text-xs"
+            >
+              Needed for trade
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Filter mode toggle */}
       <div
@@ -97,7 +150,8 @@ export default function MiddleRow() {
         style={{ fontFamily: "var(--font-space)" }}
         className="w-full text-center font-medium self-start min-h-fit h-10 text-white px-4 py-2 rounded-md bg-transparent border border-[#9D5CFF]/20 hover:bg-[#9D5CFF]/10 transition-colors flex items-center justify-center mt-auto mb-4"
         onClick={() => {
-          resetFilters();
+          resetFilters(); // keep old UI values reset
+          resetAllFilters();
         }}
       >
         Reset filters

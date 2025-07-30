@@ -59,6 +59,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.skinsmonkey.com",
       },
+      {
+        protocol: "https",
+        hostname: "steamcommunity-a.akamaihd.net",
+      },
     ],
   },
   webpack: (config, { isServer }) => {

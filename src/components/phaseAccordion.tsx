@@ -6,11 +6,21 @@ import {
 } from "@/components/ui/accordion";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckIcon } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 export default function PhaseAccordion({ phase }: { phase: string[] }) {
+  const [isPhaseOpen, setIsPhaseOpen] = useState(false);
+  const selectedPhases = useFilterStore((s) => s.selectedPhases);
+  const togglePhase = useFilterStore((s) => s.togglePhase);
+
   return (
-    <Accordion type="single" collapsible className="w-full text-black">
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full text-black"
+      onValueChange={(value) => setIsPhaseOpen(value === "item-1")}
+    >
       <AccordionItem value="item-1" className="overflow-hidden">
         <AccordionTrigger
           className="px-1 py-1 text-white hover:no-underline font-medium text-left"
@@ -20,7 +30,7 @@ export default function PhaseAccordion({ phase }: { phase: string[] }) {
         </AccordionTrigger>
         <AccordionContent className="px-1 py-1">
           <AnimatePresence mode="wait">
-            {true && (
+            {isPhaseOpen && (
               <motion.div
                 className="w-full flex items-center justify-center flex-col py-2"
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -58,14 +68,17 @@ export default function PhaseAccordion({ phase }: { phase: string[] }) {
                       x: -5,
                       transition: {
                         duration: 0.2,
-                        delay: (8 - index) * 0.03,
+                        delay: (phase.length - 1 - index) * 0.03,
                         ease: "easeInOut",
                       },
                     }}
                   >
-                    <div className="flex items-center gap-2 opacity-80 hover:text-white text-gray-300 justify-start cursor-pointer group transition-opacity hover:opacity-100 w-full">
+                    <div
+                      className="flex items-center gap-2 opacity-80 hover:text-white text-gray-300 justify-start cursor-pointer group transition-opacity hover:opacity-100 w-full"
+                      onClick={() => togglePhase(option)}
+                    >
                       <div className="w-4 h-4 rounded flex items-center justify-center transition-colors border border-gray-400 group-hover:bg-[#9D5CFF]">
-                        {false && (
+                        {selectedPhases.includes(option) && (
                           <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
                         )}
                       </div>

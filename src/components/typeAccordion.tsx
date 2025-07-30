@@ -1,3 +1,4 @@
+"use client";
 import {
   Accordion,
   AccordionItem,
@@ -7,9 +8,12 @@ import {
 import { CheckIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useFilterStore } from "@/app/stores/filterStore";
 
 export default function TypeAccordion() {
   const [isTypeOpen, setIsTypeOpen] = useState(false);
+  const selectedTypes = useFilterStore((s) => s.selectedTypes);
+  const toggleType = useFilterStore((s) => s.toggleType);
 
   const types = [
     "Gloves",
@@ -90,12 +94,13 @@ export default function TypeAccordion() {
                     <div
                       className="flex items-center gap-2 opacity-80 hover:text-white text-gray-300 justify-start 
                       cursor-pointer group transition-opacity hover:opacity-100 w-full"
+                      onClick={() => toggleType(option)}
                     >
                       <div
                         className="w-4 h-4 rounded flex items-center justify-center transition-colors 
-                        border border-gray-400 group-hover:bg-yellow-400"
+                        border border-gray-400 group-hover:bg-[#9D5CFF]"
                       >
-                        {false && (
+                        {selectedTypes.includes(option) && (
                           <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
                         )}
                       </div>
