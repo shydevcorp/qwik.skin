@@ -3,7 +3,6 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import GunModal from "@/components/gunModal";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
-import BottomBar from "@/components/bottomBar";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -43,7 +42,6 @@ export default function RootLayout({
 
         <Navbar />
         {children}
-        <BottomBar />
       </body>
     </html>
   );

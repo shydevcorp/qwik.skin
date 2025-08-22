@@ -11,7 +11,7 @@ export function WeaponImages() {
       y: [0, -3, 0, 3, 0],
       transition: {
         duration: 10,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
         repeat: Infinity,
         repeatType: "loop" as const,
       },
