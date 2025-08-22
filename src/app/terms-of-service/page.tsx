@@ -3,7 +3,6 @@ import React from "react";
 export default function TermsOfService() {
   return (
     <div className="w-full min-h-screen flex flex-col gap-8 relative overflow-hidden px-4 md:px-16 lg:px-[500px] pb-16 bg-[#1A1625]">
-      {/* Header section */}
       <div className="w-full bg-[#2D2438] py-8 absolute top-0 left-0 self-start">
         <h1
           className="absolute -translate-x-[50px] left-0 bottom-[50%] translate-y-1/4 text-[4rem] px-4 md:px-16 lg:px-[525px] font-bold select-none tracking-tight text-transparent leading-[0.85] mt-12 hidden sm:block"
@@ -22,7 +21,6 @@ export default function TermsOfService() {
         </p>
       </div>
 
-      {/* Content sections */}
       <div className="mt-32 pt-16 text-gray-300 text-sm space-y-4">
         <p className="text-gray-300/60">
           Thank you for visiting{" "}

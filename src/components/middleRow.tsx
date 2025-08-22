@@ -50,8 +50,7 @@ export default function MiddleRow() {
   }, [priceRange, setMinInput, setMaxInput]);
 
   return (
-    <div className="basis-2/12 gap-2 p-4 px-2 h-full flex-col min-w-[200px]   flex max-[950px]:hidden">
-      {/* Trade button */}
+    <div className="basis-3/12 gap-2 p-4 px-2 h-full flex-col min-w-[250px] flex max-[950px]:hidden">
       <button className="w-full text-center font-semibold self-start min-h-fit h-10 text-[#1A1625] p-4 rounded-md bg-[#9D5CFF]">
         Trade items
       </button>
@@ -90,7 +89,6 @@ export default function MiddleRow() {
         )}
       </AnimatePresence>
 
-      {/* Filter mode toggle */}
       <div
         style={{ fontFamily: "var(--font-space)" }}
         className="w-full h-10 p-1 bg-[#2D2438] rounded-sm flex gap-1 relative overflow-hidden"
@@ -115,7 +113,6 @@ export default function MiddleRow() {
         </div>
       </div>
 
-      {/* Basic Accordion */}
       <div className="w-full h-full max-h-[80%] overflow-y-auto no-scrollbar">
         <AnimatePresence mode="wait" initial={false}>
           {accordionType === "basic" ? (
@@ -145,12 +142,11 @@ export default function MiddleRow() {
         </AnimatePresence>
       </div>
 
-      {/* Reset Filters Button */}
       <button
         style={{ fontFamily: "var(--font-space)" }}
         className="w-full text-center font-medium self-start min-h-fit h-10 text-white px-4 py-2 rounded-md bg-transparent border border-[#9D5CFF]/20 hover:bg-[#9D5CFF]/10 transition-colors flex items-center justify-center mt-auto mb-4"
         onClick={() => {
-          resetFilters(); // keep old UI values reset
+          resetFilters();
           resetAllFilters();
         }}
       >

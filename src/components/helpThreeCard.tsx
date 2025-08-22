@@ -57,7 +57,6 @@ const HelpThreeCard = () => {
             `}
             style={{ fontFamily: "var(--font-space)" }}
           >
-            {/* Card image on top */}
             <div className="w-full h-[140px] flex items-center justify-center rounded-t-lg relative">
               <img
                 src={card.image}
@@ -67,7 +66,6 @@ const HelpThreeCard = () => {
                 style={{ userSelect: "none" }}
               />
             </div>
-            {/* Title & Description */}
             <div className="flex-1 flex flex-col absolute bottom-0 px-5 py-4">
               <h2
                 className={`

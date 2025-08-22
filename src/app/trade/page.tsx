@@ -1,13 +1,7 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import { motion, AnimatePresence } from "framer-motion";
-import { demoData } from "@/lib/demo-data";
 import { CustomAccordion } from "@/components/ui/custom-accordion";
-import Image from "next/image";
 import GunListHeader from "@/components/gunListHeader";
 import MiddleRow from "@/components/middleRow";
 import { MappedGuns } from "@/components/mappedGuns";
@@ -16,59 +10,28 @@ import ResponsiveToggle from "@/components/ResponsiveToggle";
 import useGunStore from "@/app/stores/gunStore";
 
 export default function TradePage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [cookieInfo, setCookieInfo] = useState<string>("Checking cookies...");
-  const [host, setHost] = useState<string>("Checking hostname...");
   const { totalValue } = useGunStore();
-  // Responsive toggle state
   const [activeColumn, setActiveColumn] = useState<"user" | "site" | null>(
     "user",
   );
 
-  // Helper to format value
-  function formatCurrency(val: number) {
-    if (val < 1000) return val.toFixed(2);
-    return val.toFixed(0);
-  }
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const cookies = document.cookie;
-      setCookieInfo(cookies || "No cookies found");
-      setHost(window.location.hostname);
-    }
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (status === "unauthenticated") {
-        console.log("User is not authenticated, redirecting to home");
-        router.push("/");
-      }
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [status, router]);
-
   return (
-    <div className="min-h-screen h-screen bg-[#1A1625] relative w-screen flex justify-center overflow-hidden pr-8 pl-3 max-[950px]:flex-col max-[950px]:pr-1 max-[950px]:pl-0">
-      {/* Responsive Toggle Bar */}
-      <ResponsiveToggle
-        activeColumn={activeColumn}
-        setActiveColumn={setActiveColumn}
-      />
+    <div className="h-[calc(100vh-100px)] bg-[#1A1625] relative w-screen flex flex-col overflow-hidden">
+      <div className="flex-shrink-0">
+        <ResponsiveToggle
+          activeColumn={activeColumn}
+          setActiveColumn={setActiveColumn}
+        />
+      </div>
 
-      {/* Animated Inventory Columns for Small Screens and Normal for Large Screens */}
-      <div className="w-full flex-1 flex">
-        {/* Large screens: show both columns as before */}
-        <div className="w-full flex min-[951px]:flex max-[950px]:hidden">
-          {/* Left Column (User Inventory) */}
-          <div className="bg-[#1A1625] basis-3/6 p-4 pb-0 h-full flex-col gap-4 flex">
+      <div className="w-full flex-1 flex overflow-hidden min-h-0">
+        <div className="w-full h-full flex min-[951px]:flex max-[950px]:hidden overflow-hidden">
+          {/* Left Panel - You Offer */}
+          <div className="bg-[#1A1625] basis-3/6 p-4 pb-0 h-full flex flex-col gap-4 overflow-hidden min-h-0">
             <CustomAccordion
               title="You Offer"
               value={0}
-              className="max-[950px]:hidden"
+              className="max-[950px]:hidden flex-shrink-0"
               contentClassName="bg-[#2D2438] h-[150px] text-white"
               headerClassName="bg-[#2D2438] text-white"
               headerText="You Offer"
@@ -76,12 +39,12 @@ export default function TradePage() {
             >
               Add the items you want to trade with Qwik.skin
             </CustomAccordion>
-            <div className="w-full h-[100%] bg-[#1A1625] rounded-xl rounded-b-none overflow-hidden">
-              <div className="h-[60px] w-full bg-white/5 max-[950px]:hidden">
+            <div className="w-full flex-1 bg-[#1A1625] rounded-xl rounded-b-none overflow-hidden flex flex-col min-h-0">
+              <div className="h-[60px] w-full bg-white/5 max-[950px]:hidden flex-shrink-0">
                 <GunListHeader isRev={true} />
               </div>
-              <div className="h-[100%] mt-[2px] w-[100%] scrollbar-slim-change pb-[30px] overflow-y-scroll overflow-x-visible flex flex-col items-center justify-center">
-                <div className="p-6 text-center overflow-y-auto bg-[#1A1625] scrollbar-slim-change gap-4 flex flex-col items-center justify-center rounded-lg px-16 w-full mx-auto">
+              <div className="flex-1 mt-[2px] w-full overflow-y-auto scrollbar-slim-change min-h-0">
+                <div className="p-6 text-center bg-[#1A1625] gap-4 flex flex-col items-center justify-center rounded-lg px-16 w-full mx-auto min-h-full">
                   <div className="flex justify-center mb-2">
                     <svg
                       className="text-[#ff000070] w-12 h-12"
@@ -124,60 +87,51 @@ export default function TradePage() {
                         data-icon="arrow-right"
                         role="img"
                         xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        className="w-5 h-5 text-[#9D5CFF]"
+                        viewBox="0 0 448 512"
+                        className="w-4 h-4"
                       >
                         <path
                           fill="currentColor"
-                          d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+                          d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"
                         ></path>
                       </svg>
                     </a>
-                    <div className="text-xs text-gray-400/70 p-3 rounded-md">
-                      <p>
-                        Trade is temporarily disabled after changing the
-                        password, device, or mobile authenticator. Cancelling
-                        escrow trade puts your account on a 7-day trade
-                        cooldown.
-                      </p>
-                    </div>
                   </div>
-                  <button className="bg-transparent border border-[#9D5CFF]/20 hover:bg-[#9D5CFF]/10 transition-colors py-2 px-6 rounded-md text-sm">
-                    Refresh Account
-                  </button>
                 </div>
               </div>
             </div>
           </div>
-          {/* Middle Column */}
-          <div className={`max-[950px]:hidden  basis-2/12`}>
+          {/* Middle Panel */}
+          <div className="flex-shrink-0">
             <MiddleRow />
           </div>
-          {/* Right Column (Site Inventory) */}
-          <div className="basis-3/6 p-4 pb-0 flex flex-col gap-4 h-full ">
+          {/* Right Panel - Site Offers */}
+          <div className="bg-[#1A1625] basis-3/6 p-4 pb-0 h-full flex flex-col gap-4 overflow-hidden min-h-0">
             <CustomAccordion
-              title="You Recieve"
-              value={Number(
-                totalValue.toString().slice(0, -2) +
-                  "." +
-                  totalValue.toString().slice(-2),
-              )}
-              className=""
+              title="Site Offers"
+              value={totalValue}
+              className="max-[950px]:hidden flex-shrink-0"
               contentClassName="bg-[#2D2438] h-[150px] text-white"
               headerClassName="bg-[#2D2438] text-white"
-              headerText="You Recieve"
+              headerText="Site Offers"
               isRev={false}
             >
-              Add the items you want to recieve from our inventory
+              Add the items you want to receive from Qwik.skin
             </CustomAccordion>
-            <div className="w-[calc(100%+4px)] h-[100%] rounded-xl rounded-b-none overflow-hidden border border-[#1A1625]">
-              <GunListHeader isRev={false} />
-              <MappedGuns isResponsive={false} />
-              <div className="h-[60px] w-full bg-[#2D2438] flex items-center px-6" />
+            <div className="w-full flex-1 bg-[#1A1625] rounded-xl rounded-b-none overflow-hidden flex flex-col min-h-0">
+              <div className="h-[60px] w-full bg-white/5 max-[950px]:hidden flex-shrink-0">
+                <GunListHeader isRev={false} />
+              </div>
+              <div className="flex-1 mt-[2px] w-full overflow-y-auto scrollbar-slim-change min-h-0">
+                <MappedGuns />
+              </div>
             </div>
           </div>
         </div>
-        <SmallScreenTrade activeColumn={activeColumn} />
+        {/* Mobile View */}
+        <div className="w-full h-full min-[951px]:hidden overflow-hidden min-h-0">
+          <SmallScreenTrade activeColumn={activeColumn} />
+        </div>
       </div>
     </div>
   );

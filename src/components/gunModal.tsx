@@ -1,14 +1,7 @@
 "use client";
-import React, { useEffect, useCallback } from "react";
+import React from "react";
 import useAccordionStore from "@/app/stores/accordionStore";
-import Image from "next/image";
-import {
-  motion,
-  AnimatePresence,
-  animate,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import GunModalLeft from "./gunModalLeft";
 import GunModalRight from "./gunModalRight";
 export default function GunModal() {
@@ -32,10 +25,7 @@ export default function GunModal() {
           onClick={handleBackdropClick}
         >
           <div className="w-full min-[949px]:w-[1100px] min-[949px]:max-w-[98%] h-fit  min-[949px]:h-[65%]  mx-auto  p-2 relative bg-[#1A1625]  rounded-md flex flex-col min-[949px]:flex-row">
-            {/* left section  */}
             <GunModalLeft modalGun={modalGun} setModalGun={setModalGun} />
-
-            {/* right section  */}
             <GunModalRight modalGun={modalGun} setModalGun={setModalGun} />
           </div>
         </motion.div>

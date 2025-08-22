@@ -1,7 +1,6 @@
 import { Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
-import { AuthProvider } from "@/components/SessionProvider";
 import GunModal from "@/components/gunModal";
 import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
 import BottomBar from "@/components/bottomBar";
@@ -32,21 +31,18 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${spaceGrotesk.variable} w-screen font-sans antialiased bg-gradient-to-br from-[#0A0A0A] via-[#0D0D0D] to-[#0A0A0A] min-h-screen overflow-x-hidden relative`}
       >
-        <AuthProvider>
-          {/* Development mode scrolling bar */}
-          <VelocityScroll
-            className="text-xs md:text-sm font-semibold text-white bg-gradient-to-r from-purple-700 via-fuchsia-600 to-pink-600 py-2 px-8 uppercase tracking-wider"
-            defaultVelocity={3}
-            numRows={1}
-          >
-            This site is currently in development mode
-          </VelocityScroll>
+        <VelocityScroll
+          className="text-xs md:text-sm font-semibold text-white bg-gradient-to-r from-purple-700 via-fuchsia-600 to-pink-600 py-2 px-8 uppercase tracking-wider"
+          defaultVelocity={3}
+          numRows={1}
+        >
+          This site is currently in development mode
+        </VelocityScroll>
 
-          <GunModal />
+        <GunModal />
 
-          <Navbar />
-          {children}
-        </AuthProvider>
+        <Navbar />
+        {children}
         <BottomBar />
       </body>
     </html>

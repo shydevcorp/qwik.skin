@@ -6,11 +6,9 @@ import HelpTwoCol from "@/components/helpTwoCol";
 export default function Help() {
   return (
     <div className="w-full min-h-screen flex flex-col gap-6 sm:gap-8 relative overflow-hidden px-3 sm:px-4 md:px-16 lg:px-64 pb-12 sm:pb-16">
-      {/* top banner */}
       <div className="w-full h-[40vh] sm:h-[45vh] bg-black absolute top-0 left-0 px-3 sm:px-4 md:px-16 lg:px-64">
         <div className="w-full h-[40vh] sm:h-[45vh] relative flex flex-col justify-center px-0">
           <div className="flex flex-row justify-between h-full w-full">
-            {/* Left: Text content */}
             <div className="flex flex-col justify-center h-full w-full z-10">
               <h1
                 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2"
@@ -72,7 +70,6 @@ export default function Help() {
                 </button>
               </div>
             </div>
-            {/* Right: Image with white color blended to 0 */}
             <div className="hidden md:flex items-center justify-end flex-1 h-full translate-x-[40%] absolute right-0 z-50">
               <img
                 src="/banner-monkey.png"

@@ -9,7 +9,7 @@ export function SmallScreenTrade({
   activeColumn: "user" | "site" | "both";
 }) {
   return (
-    <div className="w-full min-[951px]:hidden relative h-full ">
+    <div className="w-full h-full min-[951px]:hidden relative overflow-hidden">
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.div
           key={activeColumn}
@@ -20,14 +20,16 @@ export function SmallScreenTrade({
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: activeColumn === "user" ? "-100%" : "100%", opacity: 0 }}
           transition={{ type: "spring", stiffness: 800, damping: 60 }}
-          className="absolute top-0 left-0 w-full h-full "
+          className="absolute top-0 left-0 w-full h-full overflow-hidden"
         >
           {activeColumn === "user" ? (
-            <div className="bg-[#1A1625] p-0 pb-0 h-full flex-col  flex">
-              <div className="w-full h-[100%] bg-[#1A1625] rounded-b-none overflow-hidden">
-                <SmallScreenFilter />
-                <div className="h-[100%] mt-[2px] w-[100%] scrollbar-slim-change pb-[30px] overflow-y-scroll overflow-x-visible flex flex-col items-center justify-center">
-                  <div className="p-6 text-center overflow-y-auto bg-[#1A1625] scrollbar-slim-change gap-4 flex flex-col items-center justify-center rounded-lg px-16 w-full mx-auto">
+            <div className="bg-[#1A1625] p-0 pb-0 h-full flex flex-col overflow-hidden">
+              <div className="w-full flex-1 bg-[#1A1625] rounded-b-none overflow-hidden flex flex-col min-h-0">
+                <div className="flex-shrink-0">
+                  <SmallScreenFilter />
+                </div>
+                <div className="flex-1 mt-[2px] w-full overflow-y-auto scrollbar-slim-change min-h-0">
+                  <div className="p-6 text-center bg-[#1A1625] gap-4 flex flex-col items-center justify-center rounded-lg px-16 w-full mx-auto min-h-full">
                     <div className="flex justify-center mb-2">
                       <svg
                         className="text-[#9D5CFF] w-12 h-12"
@@ -93,11 +95,14 @@ export function SmallScreenTrade({
               </div>
             </div>
           ) : (
-            <div className="basis-6/12 p-2 pt-0 pb-0 flex flex-col gap-1 h-full ">
-              <SmallScreenFilter />
-              <div className="w-[calc(100%+4px)] h-[100%]  rounded-b-none overflow-hidden border border-[#1A1625]">
-                <MappedGuns isResponsive={true} />
-                <div className="h-[60px] w-full bg-[#2D2438] flex items-center px-6" />
+            <div className="p-2 pt-0 pb-0 flex flex-col gap-1 h-full overflow-hidden">
+              <div className="flex-shrink-0">
+                <SmallScreenFilter />
+              </div>
+              <div className="w-full flex-1 rounded-b-none overflow-hidden border border-[#1A1625] flex flex-col min-h-0">
+                <div className="flex-1 overflow-y-auto min-h-0">
+                  <MappedGuns isResponsive={true} />
+                </div>
               </div>
             </div>
           )}

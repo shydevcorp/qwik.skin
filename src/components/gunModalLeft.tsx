@@ -33,7 +33,6 @@ export default function GunModalLeft({
 
   return (
     <section className="w-full min-[949px]:w-[60%] h-fit min-[949px]:h-full flex flex-col p-2 relative">
-      {/* Background Pattern */}
       <img
         src="/dot-pattern.svg"
         alt="dot pattern"
@@ -48,10 +47,8 @@ export default function GunModalLeft({
         }}
       />
 
-      {/* Top Bar */}
       <div className="w-full h-[10%] bg-[#1A1625] relative z-[1000]">
         <div className="w-full h-full items-center justify-between flex">
-          {/* Trade Status */}
           <div className="w-[20%] h-full flex items-center justify-center">
             <div
               style={{ fontFamily: "var(--font-space)" }}
@@ -71,9 +68,7 @@ export default function GunModalLeft({
             </div>
           </div>
 
-          {/* Action Links */}
           <div className="h-full flex items-center justify-center">
-            {/* Steam Link */}
             {screenWidth >= 949 && (
               <div className="w-fit h-full rounded-md group relative z-[1000]">
                 <a
@@ -101,7 +96,6 @@ export default function GunModalLeft({
               </div>
             )}
 
-            {/* Inspect Link */}
             {screenWidth >= 949 && (
               <div className="w-fit h-full rounded-md group">
                 <a
@@ -146,7 +140,6 @@ export default function GunModalLeft({
         </div>
       </div>
 
-      {/* Image Section */}
       <div className="w-full h-[60%] flex items-center justify-center relative z-[300] overflow-hidden">
         <motion.div
           className="w-full h-auto relative cursor-move"
@@ -176,7 +169,6 @@ export default function GunModalLeft({
           />
         </motion.div>
 
-        {/* Image Overlay Gradients */}
         <div
           style={{
             maskImage:
@@ -193,7 +185,6 @@ export default function GunModalLeft({
         />
       </div>
 
-      {/* Bottom Info Section */}
       <div className="w-full h-[30%] flex flex-col gap-5 p-2">
         <div className="w-full flex justify-between">
           <div className="flex items-center flex-col justify-start">
@@ -223,7 +214,6 @@ export default function GunModalLeft({
           </div>
         </div>
 
-        {/* Add to Cart Button */}
         <button
           style={{ fontFamily: "var(--font-space-grotesk)" }}
           className={`text-lg ${guns.includes(modalGun?.uniqueId.toString() || "0") ? "bg-violet-500/30" : "bg-violet-500/80"}   rounded-md h-12 flex items-center justify-center gap-2`}

@@ -12,7 +12,7 @@ interface MappedGunsProps {
 
 const MappedGuns = ({ isResponsive = false }: MappedGunsProps) => {
   const { setModalGun } = useAccordionStore();
-  const { guns, setGuns, toggleGun } = useGunStore();
+  const { guns, toggleGun } = useGunStore();
   const filters = useFilterStore((s) => s);
   const filteredData = React.useMemo(
     () => applyFilters(demoData, filters),
@@ -71,23 +71,12 @@ const MappedGuns = ({ isResponsive = false }: MappedGunsProps) => {
 
   return (
     <div
-      className={`h-[100%] mt-[1px] w-[100%]  scrollbar-slim-change pb-[81px] bg-[#1A1625]/40 grid ${
+      className={`w-full h-full bg-[#1A1625]/40 grid gap-1 p-2 ${
         isResponsive
           ? "max-[400px]:grid-cols-2 min-[401px]:grid-cols-3 min-[501px]:grid-cols-4 min-[601px]:grid-cols-5 min-[751px]:grid-cols-6"
-          : "max-[400px]:grid-cols-2 min-[401px]:grid-cols-3 min-[501px]:grid-cols-4 min-[601px]:grid-cols-5 min-[751px]:grid-cols-6 min-[951px]:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 overflow-y-scroll"
-      } overflow-x-visible`}
+          : "max-[400px]:grid-cols-2 min-[401px]:grid-cols-3 min-[501px]:grid-cols-4 min-[601px]:grid-cols-5 min-[751px]:grid-cols-5 min-[951px]:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5"
+      }`}
     >
-      {sortedData.map((item, index) => (
-        <GunItem
-          key={index}
-          item={item}
-          index={index}
-          isResponsive={isResponsive}
-          isSelected={guns.includes(item.uniqueId.toString())}
-          toggleGun={() => handleGunClick(item, index)}
-          setModalGun={setModalGun}
-        />
-      ))}
       {sortedData.map((item, index) => (
         <GunItem
           key={index}
