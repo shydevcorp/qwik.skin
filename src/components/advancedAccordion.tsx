@@ -1,5 +1,5 @@
 import TradeLockAccordion from "./TradeLockAccordion";
-import { AnimatePresence, motion } from "framer-motion";
+
 import OtherAccordion from "./otherAccordion";
 import { useState } from "react";
 import useAccordionStore from "@/app/stores/accordionStore";
@@ -26,7 +26,7 @@ export default function AdvancedAccordion() {
   } = useAccordionStore();
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto max-w-[250px] pb-2 no-scrollbar gap-2">
+    <div className="flex flex-col h-full overflow-y-auto w-[250px] pb-2 no-scrollbar gap-2">
       <TradeLockAccordion defaultOpen={true} />
 
       <PriceAccordion

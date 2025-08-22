@@ -10,7 +10,7 @@ import {
 
 export function FAQ() {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-[#090019]">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
         <h2 className="text-4xl font-bold text-center mb-12">
           <span className="solana-gradient-text">FAQ</span> - Trading CS2 Skins

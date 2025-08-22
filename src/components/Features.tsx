@@ -9,7 +9,7 @@ export function Features() {
   };
 
   return (
-    <section className="py-20 bg-background relative overflow-hidden">
+    <section className="py-20 bg-[#090019] relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <div className="relative flex flex-col items-center">

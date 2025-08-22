@@ -3,25 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Menu,
-  ArrowLeftRight,
-  Gift,
-  HelpCircle,
-  User,
-  Receipt,
-  LogOut,
-} from "lucide-react";
+import { Menu, ArrowLeftRight } from "lucide-react";
 
 function NavbarErrorHandler() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -151,8 +135,6 @@ interface MobileMenuProps {
 function MobileMenu({ isOpen, onClose, router }: MobileMenuProps) {
   const mobileMenuItems = [
     { name: "Trade Skins", icon: ArrowLeftRight, href: "/trade" },
-    { name: "Freebies", icon: Gift, href: "/free-csgo-skins" },
-    { name: "Help Center", icon: HelpCircle, href: "/help" },
   ];
 
   const handleItemClick = (href: string) => {
@@ -185,7 +167,6 @@ function MobileMenu({ isOpen, onClose, router }: MobileMenuProps) {
             className="fixed w-[95%] mx-auto bottom-0 left-0 right-0 bg-[#232126] rounded-t-lg z-50 overflow-y-auto"
           >
             <div className="p-6 space-y-2">
-              {/* Main Navigation */}
               <div className="space-y-2">
                 {mobileMenuItems.map((item, idx) => {
                   const IconComponent = item.icon;
@@ -209,7 +190,6 @@ function MobileMenu({ isOpen, onClose, router }: MobileMenuProps) {
                 })}
               </div>
 
-              {/* Close Button */}
               <div className="border-t border-gray-600 pt-4">
                 <button
                   onClick={onClose}
@@ -236,12 +216,6 @@ export function Navbar() {
 
   const navItems = [
     { name: "Trade Skins", path: "/trade", icon: "/navbar/trade.svg" },
-    {
-      name: "Freebies",
-      path: "/free-csgo-skins",
-      icon: "/navbar/freebies.svg",
-    },
-    { name: "Help Center", path: "/help", icon: "/navbar/help.svg" },
   ];
 
   return (
@@ -302,7 +276,6 @@ export function Navbar() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              {/* Mobile Hamburger Button */}
               <Button
                 variant="ghost"
                 size="sm"
@@ -320,7 +293,6 @@ export function Navbar() {
         </Suspense>
       </nav>
 
-      {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}

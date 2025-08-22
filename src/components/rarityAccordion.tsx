@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AnimatePresence, motion } from "framer-motion";
+
 import { CheckIcon } from "lucide-react";
 import React, { useState } from "react";
 import { useFilterStore } from "@/app/stores/filterStore";
@@ -29,70 +29,32 @@ export default function RarityAccordion({ rarity }: { rarity: any }) {
           Rarity
         </AccordionTrigger>
         <AccordionContent className="px-1 py-1">
-          <AnimatePresence mode="wait">
-            {isRarityOpen && (
-              <motion.div
-                className="w-full flex items-center justify-center flex-col py-2"
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{
-                  opacity: 0,
-                  y: -10,
-                  scale: 0.95,
-                  transition: {
-                    duration: 0.2,
-                    ease: "easeInOut",
-                  },
-                }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeOut",
-                }}
-              >
-                {rarity.map((option, index) => (
-                  <motion.div
-                    key={index}
-                    className="h-8 w-full flex items-center px-2 rounded-md"
-                    initial={{ opacity: 0, x: -5 }}
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                      transition: {
-                        delay: index * 0.05,
-                        duration: 0.3,
-                        ease: "easeOut",
-                      },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      x: -5,
-                      transition: {
-                        duration: 0.2,
-                        delay: (rarity.length - 1 - index) * 0.03,
-                        ease: "easeInOut",
-                      },
-                    }}
+          {isRarityOpen && (
+            <div className="w-full flex items-center justify-center flex-col py-2">
+              {rarity.map((option, index) => (
+                <div
+                  key={index}
+                  className="h-6 w-full flex items-center px-2 rounded-md"
+                >
+                  <div
+                    className="flex items-center gap-2 opacity-80 hover:text-white justify-start cursor-pointer group transition-opacity hover:opacity-100 w-full"
+                    onClick={() => toggleRarity(option.text)}
                   >
-                    <div
-                      className="flex items-center gap-2 opacity-80 hover:text-white justify-start cursor-pointer group transition-opacity hover:opacity-100 w-full"
-                      onClick={() => toggleRarity(option.text)}
-                    >
-                      <div className="w-4 h-4 rounded flex items-center justify-center transition-colors border border-gray-400 group-hover:bg-[#9D5CFF]">
-                        {selectedRarities.includes(option.text) && (
-                          <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
-                        )}
-                      </div>
-                      <span
-                        className={`transition-opacity opacity-80 group-hover:opacity-100 text-md tracking-wide ${option.color}`}
-                      >
-                        {option.text}
-                      </span>
+                    <div className="w-4 h-4 rounded flex items-center justify-center transition-colors border border-gray-400 group-hover:bg-[#9D5CFF]">
+                      {selectedRarities.includes(option.text) && (
+                        <CheckIcon className="h-3 w-3 text-[#23211d] opacity-80" />
+                      )}
                     </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                    <span
+                      className={`transition-opacity opacity-80 group-hover:opacity-100 text-md tracking-wide ${option.color}`}
+                    >
+                      {option.text}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>

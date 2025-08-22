@@ -29,13 +29,13 @@ export function Hero() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden pt-16">
+    <div className="relative min-h-screen bg-[#090019] overflow-hidden pt-16">
       <div
         className="absolute left-12 top-1/2 -translate-y-1/2 text-[8rem] font-bold select-none tracking-tight text-transparent leading-[0.85] mt-12 hidden sm:block"
         style={{ WebkitTextStroke: "1.5px rgb(82, 82, 91, 0.3)" }}
       >
         <p>TRADE</p>
-        <p>CS2</p>
+        <p>GAMING</p>
         <p>SKINS</p>
         <p>ON</p>
         <p>SOLANA</p>
@@ -47,7 +47,9 @@ export function Hero() {
             <h1 className="flex flex-col text-6xl font-medium mb-6 tracking-tight leading-[1.1]">
               <span>Buy, Sell & Trade</span>
               <span>
-                <span className="solana-gradient-text font-extrabold">CS2</span>{" "}
+                <span className="solana-gradient-text font-extrabold">
+                  Gaming
+                </span>{" "}
                 Skins
               </span>
             </h1>

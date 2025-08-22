@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { AnimatePresence, motion } from "framer-motion";
+
 import { useState } from "react";
 import { useFilterStore } from "@/app/stores/filterStore";
 
@@ -72,16 +72,7 @@ export default function TradeLockAccordion({
             <TooltipProvider delayDuration={200}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      ease: "easeOut",
-                    }}
-                    className="mr-16 inline-flex items-center justify-center"
-                  >
+                  <div className="mr-16 inline-flex items-center justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -96,7 +87,7 @@ export default function TradeLockAccordion({
                       <path d="M12 16v-4" />
                       <path d="M12 8h.01" />
                     </svg>
-                  </motion.div>
+                  </div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-md">
                   <p className="text-xs">
@@ -111,130 +102,58 @@ export default function TradeLockAccordion({
           )}
         </AccordionTrigger>
         <AccordionContent className="px-1 py-1">
-          <AnimatePresence mode="wait">
-            {isTradeLockOpen && (
-              <motion.div
-                className="w-full flex items-center justify-center flex-col py-2"
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{
-                  opacity: 0,
-                  y: -10,
-                  scale: 0.95,
-                  transition: {
-                    duration: 0.2,
-                    ease: "easeInOut",
-                  },
-                }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeOut",
-                }}
-              >
-                <motion.div
-                  className="grid grid-cols-9 gap-[2px] relative"
-                  initial={{ opacity: 0.8, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{
-                    opacity: 0,
-                    y: 5,
-                    transition: {
-                      duration: 0.2,
-                      ease: "easeInOut",
-                    },
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full transition-all duration-300 scale-x-110 h-[3px] z-10 bg-[#2D2438]"
-                    layoutId="slider-line"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  >
-                    <div
-                      className="absolute inset-0 bg-white origin-right"
-                      style={{
-                        width: `  ${(getSliderValue() / (colours.length - 1)) * 100}%`,
-                        maskImage: "linear-gradient(to right, black, black)",
-                        WebkitMaskImage:
-                          "linear-gradient(to right, black, black)",
-                      }}
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full scale-x-110 h-[1px] z-10 bg-[#9D5CFF]/20"
-                    layoutId="slider-line-shadow"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          {isTradeLockOpen && (
+            <div className="w-full flex items-center justify-center flex-col py-2">
+              <div className="grid grid-cols-9 gap-[2px] relative">
+                <div className="absolute bottom-0 left-0 w-full transition-all duration-300 scale-x-110 h-[3px] z-10 bg-[#2D2438]">
+                  <div
+                    className="absolute inset-0 bg-white origin-right"
+                    style={{
+                      width: `  ${(getSliderValue() / (colours.length - 1)) * 100}%`,
+                      maskImage: "linear-gradient(to right, black, black)",
+                      WebkitMaskImage:
+                        "linear-gradient(to right, black, black)",
+                    }}
                   />
-                  {colours.map((color, index) => (
-                    <motion.div
-                      key={index}
-                      draggable={false}
-                      onClick={() => handleSliderChange(index)}
-                      onDragOver={(e) => {
-                        e.preventDefault();
-                      }}
-                      onDrop={(e) => {
-                        e.preventDefault();
-                        const draggedIndex = parseInt(
-                          e.dataTransfer.getData("index"),
-                        );
-                        handleSliderChange(draggedIndex);
-                      }}
-                      className={`w-5 h-4 cursor-pointer relative transition-colors duration-300  flex items-end justify-center`}
-                      style={{
-                        backgroundColor:
-                          getSliderValue() >= index ? color : "#383530",
-                      }}
-                      whileHover={{
-                        scale: 1.15,
-                        zIndex: 5,
-                        boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 17,
-                      }}
-                    >
-                      <motion.div
-                        className="h-2 w-[1px] bg-white"
-                        initial={{ opacity: 0.6 }}
-                        whileHover={{ opacity: 1 }}
-                      ></motion.div>
-                      <AnimatePresence>
-                        {getSliderValue() === index && (
-                          <motion.div
-                            className="absolute bottom-0 left-0 w-full h-0 border-transparent border-b-white border-b-[16px] border-l-[10px] border-r-[10px] translate-y-1 z-10"
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 0.75 }}
-                            exit={{ opacity: 0, scale: 0.5 }}
-                            layoutId="selected-indicator"
-                            transition={{
-                              type: "spring",
-                              stiffness: 500,
-                              damping: 30,
-                            }}
-                          ></motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  ))}
-                </motion.div>
-                <motion.div
-                  className="text-white/70 text-xs mt-4 text-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  {tradeLocked === null
-                    ? "No filter"
-                    : tradeLocked === true
-                      ? "Trade locked only"
-                      : "Not trade locked"}
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                </div>
+                <div className="absolute bottom-0 left-0 w-full scale-x-110 h-[1px] z-10 bg-[#9D5CFF]/20" />
+                {colours.map((color, index) => (
+                  <div
+                    key={index}
+                    draggable={false}
+                    onClick={() => handleSliderChange(index)}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const draggedIndex = parseInt(
+                        e.dataTransfer.getData("index"),
+                      );
+                      handleSliderChange(draggedIndex);
+                    }}
+                    className={`w-5 h-4 cursor-pointer relative transition-colors duration-300 flex items-end justify-center hover:scale-105 hover:z-10 hover:shadow-lg`}
+                    style={{
+                      backgroundColor:
+                        getSliderValue() >= index ? color : "#383530",
+                    }}
+                  >
+                    <div className="h-2 w-[1px] bg-white opacity-60 hover:opacity-100"></div>
+                    {getSliderValue() === index && (
+                      <div className="absolute bottom-0 left-0 w-full h-0 border-transparent border-b-white border-b-[16px] border-l-[10px] border-r-[10px] translate-y-1 z-10"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="text-white/70 text-xs mt-4 text-center">
+                {tradeLocked === null
+                  ? "No filter"
+                  : tradeLocked === true
+                    ? "Trade locked only"
+                    : "Not trade locked"}
+              </div>
+            </div>
+          )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>

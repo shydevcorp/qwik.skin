@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AccordionBasic from "./accordionBasic";
 import AdvancedAccordion from "./advancedAccordion";
-import { AnimatePresence, motion } from "framer-motion";
 import useAccordionStore from "@/app/stores/accordionStore";
 import { useFilterStore } from "@/app/stores/filterStore";
 import useGunStore from "@/app/stores/gunStore";
@@ -54,51 +53,27 @@ export default function MiddleRow() {
       <button className="w-full text-center font-semibold self-start min-h-fit h-10 text-[#1A1625] p-4 rounded-md bg-[#9D5CFF]">
         Trade items
       </button>
-      <AnimatePresence>
-        {totalValue > 0 && (
-          <motion.div
-            initial={{
-              opacity: 0,
-              height: 0,
-              padding: "0px 0.5rem",
-              filter: "blur(2px)",
-            }}
-            animate={{
-              opacity: 1,
-              height: "auto",
-              padding: "0.5rem 0.5rem",
-              filter: "blur(0px)",
-            }}
-            exit={{
-              opacity: 0,
-              height: 0,
-              padding: "0px 0.5rem",
-              filter: "blur(2px)",
-            }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full text-center font-semibold self-start text-white/80 px-2 rounded-md bg-[#2D2438] flex items-center flex-col justify-center overflow-hidden"
+      {totalValue > 0 && (
+        <div className="w-full text-center font-semibold self-start text-white/80 px-2 rounded-md bg-[#2D2438] flex items-center flex-col justify-center overflow-hidden">
+          <TradeValue />
+          <span
+            style={{ fontFamily: "var(--font-space)" }}
+            className="text-white/40 text-xs"
           >
-            <TradeValue />
-            <span
-              style={{ fontFamily: "var(--font-space)" }}
-              className="text-white/40 text-xs"
-            >
-              Needed for trade
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Needed for trade
+          </span>
+        </div>
+      )}
 
       <div
         style={{ fontFamily: "var(--font-space)" }}
         className="w-full h-10 p-1 bg-[#2D2438] rounded-sm flex gap-1 relative overflow-hidden"
       >
-        <motion.div
-          className={`w-[calc(50%-8px)] ml-1 h-[80%] bg-white/15 absolute top-1/2 -translate-y-1/2 left-0 rounded-sm`}
-          initial={{ left: accordionType === "basic" ? "0%" : "50%" }}
-          animate={{ left: accordionType === "basic" ? "0%" : "50%" }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        ></motion.div>
+        <div
+          className={`w-[calc(50%-8px)] ml-1 h-[80%] bg-white/15 absolute top-1/2 -translate-y-1/2 rounded-sm ${
+            accordionType === "basic" ? "left-0" : "left-[50%]"
+          }`}
+        ></div>
         <div
           onClick={() => setAccordionType("basic")}
           className="w-1/2 cursor-pointer h-full relative z-4 text-white text-sm rounded-sm flex justify-center items-center"
@@ -114,32 +89,18 @@ export default function MiddleRow() {
       </div>
 
       <div className="w-full h-full max-h-[80%] overflow-y-auto no-scrollbar">
-        <AnimatePresence mode="wait" initial={false}>
-          {accordionType === "basic" ? (
-            <motion.div
-              key="basic"
-              initial={{ opacity: 0, y: 20, filter: "blur(2px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(2px)" }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <AccordionBasic
-                isAdditionalFiltersOpen={isAdditionalFiltersOpen}
-                setIsAdditionalFiltersOpen={setIsAdditionalFiltersOpen}
-              />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="advanced"
-              initial={{ opacity: 0, y: 20, filter: "blur(2px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(2px)" }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <AdvancedAccordion />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {accordionType === "basic" ? (
+          <div>
+            <AccordionBasic
+              isAdditionalFiltersOpen={isAdditionalFiltersOpen}
+              setIsAdditionalFiltersOpen={setIsAdditionalFiltersOpen}
+            />
+          </div>
+        ) : (
+          <div>
+            <AdvancedAccordion />
+          </div>
+        )}
       </div>
 
       <button

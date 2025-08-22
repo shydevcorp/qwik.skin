@@ -65,13 +65,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-      config.plugins.push(new MiniCssExtractPlugin());
-    }
-    return config;
-  },
+
   reactStrictMode: true,
   output: "standalone",
 };

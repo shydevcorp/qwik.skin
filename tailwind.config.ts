@@ -10,8 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        mono: ["var(--font-jetbrains-mono)"],
+        space: ["var(--font-space)"],
       },
       colors: {
         background: "hsl(var(--background))",

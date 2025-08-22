@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AnimatePresence, motion } from "framer-motion";
+
 import { useState } from "react";
 import { CheckIcon } from "lucide-react";
 import { Slider } from "@mui/material";
@@ -132,19 +132,7 @@ export default function PriceAccordion({
   };
 
   const renderPriceInputs = () => (
-    <motion.div
-      className="h-10 w-full relative rounded-md justify-between flex gap-2"
-      initial={{ opacity: 0, x: -5 }}
-      animate={{
-        opacity: 1,
-        x: 0,
-        transition: {
-          delay: 0.05,
-          duration: 0.3,
-          ease: "easeOut",
-        },
-      }}
-    >
+    <div className="h-10 w-full relative rounded-md justify-between flex gap-2">
       <div className="relative w-[42.5%] h-full">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300 pointer-events-none select-none">
           {text === "Price" ? "$" : text === "Fade" ? "" : ""}
@@ -192,23 +180,11 @@ export default function PriceAccordion({
           </span>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 
   const renderPriceSlider = () => (
-    <motion.div
-      className="h-8 w-full flex items-center px-5 rounded-md"
-      initial={{ opacity: 0, x: -5 }}
-      animate={{
-        opacity: 1,
-        x: 0,
-        transition: {
-          delay: 0.1,
-          duration: 0.3,
-          ease: "easeOut",
-        },
-      }}
-    >
+    <div className="h-8 w-full flex items-center px-5 rounded-md">
       <Slider
         value={priceRange}
         onChange={(_, newValue) => handlePriceChange(newValue as number[])}
@@ -219,25 +195,13 @@ export default function PriceAccordion({
         className="w-full"
         sx={getSliderStyles()}
       />
-    </motion.div>
+    </div>
   );
 
   const renderAffordableCheckbox = () => {
     if (text === "Float" || text === "Fade") return null;
     return (
-      <motion.div
-        className="h-8 w-full flex items-center px-2 rounded-md"
-        initial={{ opacity: 0, x: -5 }}
-        animate={{
-          opacity: 1,
-          x: 0,
-          transition: {
-            delay: 0.15,
-            duration: 0.3,
-            ease: "easeOut",
-          },
-        }}
-      >
+      <div className="h-8 w-full flex items-center px-2 rounded-md">
         <div
           className="flex items-center gap-2 opacity-80 hover:text-white text-gray-300 justify-center 
           cursor-pointer group transition-opacity hover:opacity-100"
@@ -258,7 +222,7 @@ export default function PriceAccordion({
             Affordable Items
           </span>
         </div>
-      </motion.div>
+      </div>
     );
   };
 
@@ -278,32 +242,13 @@ export default function PriceAccordion({
           {text}
         </AccordionTrigger>
         <AccordionContent className="px-1 py-1">
-          <AnimatePresence mode="wait" initial={false}>
-            {isPriceRangeOpen && (
-              <motion.div
-                className="flex flex-col gap-2"
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{
-                  opacity: 0,
-                  y: -10,
-                  scale: 0.95,
-                  transition: {
-                    duration: 0.2,
-                    ease: "easeInOut",
-                  },
-                }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeOut",
-                }}
-              >
-                {renderPriceInputs()}
-                {renderPriceSlider()}
-                {renderAffordableCheckbox()}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {isPriceRangeOpen && (
+            <div className="flex flex-col gap-2">
+              {renderPriceInputs()}
+              {renderPriceSlider()}
+              {renderAffordableCheckbox()}
+            </div>
+          )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
