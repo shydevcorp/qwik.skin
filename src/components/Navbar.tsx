@@ -134,7 +134,7 @@ interface MobileMenuProps {
 
 function MobileMenu({ isOpen, onClose, router }: MobileMenuProps) {
   const mobileMenuItems = [
-    { name: "Trade Skins", icon: ArrowLeftRight, href: "/trade" },
+    { name: "Trade", icon: ArrowLeftRight, href: "/trade" },
   ];
 
   const handleItemClick = (href: string) => {
@@ -215,7 +215,7 @@ export function Navbar() {
   const isLandingRoute = pathname === "/";
 
   const navItems = [
-    { name: "Trade Skins", path: "/trade", icon: "/navbar/trade.svg" },
+    { name: "Trade", path: "/trade", icon: "/navbar/trade.svg" },
   ];
 
   return (

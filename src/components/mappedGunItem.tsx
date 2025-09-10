@@ -170,14 +170,14 @@ const GunItem = ({
         {selectedItem === index && !isSelectedList && (
           <motion.div
             initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 100 + "%" }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{
               opacity: 0.3,
               height: 0,
               transition: { duration: 0.08, ease: "easeOut" },
             }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute bottom-0 overflow-hidden shadow-md flex gap-[2px] z-[30] left-0 w-full h-10 bg-[#1A1625] translate-y-full rounded-b-md"
+            className="absolute bottom-0 overflow-hidden shadow-md flex gap-[2px] z-[30] left-0 w-full h-10 bg-[#1A1625] rounded-b-md"
           >
             <div
               data-no-toggle="true"

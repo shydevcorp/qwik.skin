@@ -70,7 +70,7 @@ export default function AccordionBasic({
   );
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto max-w-[250px] pb-2 no-scrollbar gap-2">
+    <div className="flex flex-col h-full overflow-y-auto w-[250px] pb-2 no-scrollbar gap-2">
       <PriceAccordion
         priceRange={priceRange}
         setPriceRange={setPriceRange}
