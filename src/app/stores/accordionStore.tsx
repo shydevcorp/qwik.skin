@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 interface AccordionStore {
-  // Price related states
   priceRange: number[];
   setPriceRange: (priceRange: number[]) => void;
   minInput: string;
@@ -10,7 +9,6 @@ interface AccordionStore {
   setMaxInput: (maxInput: string) => void;
   text: string;
 
-  // Float related states
   FloatRange: number[];
   setFloatRange: (FloatRange: number[]) => void;
   FloatMinInput: string;
@@ -19,7 +17,6 @@ interface AccordionStore {
   setFloatMaxInput: (FloatMaxInput: string) => void;
   FloatText: string;
 
-  // Fade related states
   FadeRange: number[];
   setFadeRange: (FadeRange: number[]) => void;
   FadeMinInput: string;
@@ -28,7 +25,6 @@ interface AccordionStore {
   setFadeMaxInput: (FadeMaxInput: string) => void;
   FadeText: string;
 
-  // Modal related states
   modalGun: any;
   setModalGun: (modalGun: any) => void;
 
@@ -36,7 +32,6 @@ interface AccordionStore {
 }
 
 const useAccordionStore = create<AccordionStore>((set) => ({
-  // Price related states
   priceRange: [0, 50000],
   setPriceRange: (priceRange) => set({ priceRange }),
   minInput: "0.00",
@@ -45,7 +40,6 @@ const useAccordionStore = create<AccordionStore>((set) => ({
   setMaxInput: (maxInput) => set({ maxInput }),
   text: "Price",
 
-  // Float related states
   FloatRange: [0, 1],
   setFloatRange: (FloatRange) => set({ FloatRange }),
   FloatMinInput: "0.00",
@@ -54,7 +48,6 @@ const useAccordionStore = create<AccordionStore>((set) => ({
   setFloatMaxInput: (FloatMaxInput) => set({ FloatMaxInput }),
   FloatText: "Float",
 
-  // Fade related states
   FadeRange: [78, 100],
   setFadeRange: (FadeRange) => set({ FadeRange }),
   FadeMinInput: "78",
@@ -63,7 +56,6 @@ const useAccordionStore = create<AccordionStore>((set) => ({
   setFadeMaxInput: (FadeMaxInput) => set({ FadeMaxInput }),
   FadeText: "Fade",
 
-  // Modal related states
   modalGun: null,
   setModalGun: (modalGun) => set({ modalGun }),
 

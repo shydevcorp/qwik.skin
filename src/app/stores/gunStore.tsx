@@ -8,11 +8,10 @@ interface GunStore {
   toggleGun: (uniqueId: string, item: any) => void;
 }
 
-// Helper function to ensure we always work with valid numbers
 const ensureNumber = (value: number | string | undefined): number => {
   if (typeof value === "undefined") return 0;
   const num = typeof value === "string" ? parseFloat(value) : value;
-  return isNaN(num) ? 0 : Math.round(num * 100) / 100; // Round to 2 decimal places
+  return isNaN(num) ? 0 : Math.round(num * 100) / 100;
 };
 
 const useGunStore = create<GunStore>((set, get) => ({

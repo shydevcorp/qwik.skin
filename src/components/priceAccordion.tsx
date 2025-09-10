@@ -40,14 +40,11 @@ export default function PriceAccordion({
   const [affordableOnly, setAffordableOnly] = useState<boolean>(false);
   const [hasHover, setHasHover] = useState(false);
 
-  // Get the actual min/max values for the slider
   const sliderMin = text === "Fade" ? 78 : text === "Float" ? 0 : 0;
   const sliderMax = text === "Fade" ? 100 : text === "Float" ? 1 : 50000;
   const sliderStep = text === "Float" ? 0.00001 : text === "Fade" ? 1 : 100;
 
-  // Handle price range slider changes
   const handlePriceChange = (newValue: number[]) => {
-    // Ensure values are within bounds
     const min = Math.max(sliderMin, newValue[0]);
     const max = Math.min(sliderMax, newValue[1]);
 
@@ -59,35 +56,30 @@ export default function PriceAccordion({
     }
   };
 
-  // Handle minimum price input changes
   const handleMinInputChange = (value: string) => {
     const raw = value.replace(/[^\d.]/g, "");
     setMinInput(raw);
 
     const num = Number(raw);
     if (!isNaN(num)) {
-      // Don't allow min to exceed max - step
       const newMin = Math.min(num, priceRange[1] - sliderStep);
       setPriceRange([Math.max(sliderMin, newMin), priceRange[1]]);
       setRangeInStore([Math.max(sliderMin, newMin), priceRange[1]]);
     }
   };
 
-  // Handle maximum price input changes
   const handleMaxInputChange = (value: string) => {
     const raw = value.replace(/[^\d.]/g, "");
     setMaxInput(raw);
 
     const num = Number(raw);
     if (!isNaN(num)) {
-      // Don't allow max to be less than min + step
       const newMax = Math.max(num, priceRange[0] + sliderStep);
       setPriceRange([priceRange[0], Math.min(sliderMax, newMax)]);
       setRangeInStore([priceRange[0], Math.min(sliderMax, newMax)]);
     }
   };
 
-  // Get custom slider styles based on the type
   const getSliderStyles = () => {
     if (text === "Fade") {
       return {

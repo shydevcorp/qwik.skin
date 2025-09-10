@@ -40,7 +40,6 @@ const GunItem = ({
       onMouseEnter={() => setSelectedItem(index)}
       onMouseLeave={() => setSelectedItem(null)}
       onClick={(e) => {
-        // Toggle gun if clicking directly on the container or on elements other than buttons
         if (
           e.target === e.currentTarget ||
           !(e.target as HTMLElement).closest('[data-no-toggle="true"]')
@@ -59,7 +58,7 @@ const GunItem = ({
           >
             <Image
               onClick={(e) => {
-                e.stopPropagation(); // Prevent event from bubbling up
+                e.stopPropagation();
                 toggleGun(item.uniqueId.toString(), item);
               }}
               src={
@@ -183,7 +182,7 @@ const GunItem = ({
             <div
               data-no-toggle="true"
               onClick={(e) => {
-                e.stopPropagation(); // Prevent event from bubbling up
+                e.stopPropagation();
                 toggleGun(item.uniqueId.toString(), item.item.price);
               }}
               className="h-full w-full bg-[#6E3AE4]  hover:brightness-75 transition-all duration-200 mt-[2px] flex items-center justify-center"
@@ -193,7 +192,7 @@ const GunItem = ({
             <div
               data-no-toggle="true"
               onClick={(e) => {
-                e.stopPropagation(); // Prevent event from bubbling up
+                e.stopPropagation();
                 setModalGun(item);
               }}
               className="h-full w-full cursor-pointer bg-[#6E3AE4] hover:brightness-75 transition-all duration-200 flex mt-[2px] items-center justify-center"

@@ -26,7 +26,7 @@ export default function TradeLockAccordion({
   const setTradeLocked = useFilterStore((s) => s.setTradeLocked);
 
   const colours = [
-    "#B388FF", // Lightest purple
+    "#B388FF",
     "#A379FF",
     "#946AFF",
     "#855BFF",
@@ -34,23 +34,22 @@ export default function TradeLockAccordion({
     "#673DFF",
     "#582EFF",
     "#491FFF",
-    "#3A10FF", // Darkest purple
+    "#3A10FF",
   ];
 
-  // Convert tradeLocked state to slider value
   const getSliderValue = () => {
-    if (tradeLocked === null) return 8; // Default to end (no filter)
-    if (tradeLocked === true) return 0; // Start (trade locked only)
-    return 4; // Middle (not trade locked)
+    if (tradeLocked === null) return 8;
+    if (tradeLocked === true) return 0;
+    return 4;
   };
 
   const handleSliderChange = (index: number) => {
     if (index === 8) {
-      setTradeLocked(null); // No filter
+      setTradeLocked(null);
     } else if (index <= 2) {
-      setTradeLocked(true); // Trade locked
+      setTradeLocked(true);
     } else {
-      setTradeLocked(false); // Not trade locked
+      setTradeLocked(false);
     }
   };
 
